@@ -236,7 +236,6 @@
                   </tbody>  
             </table>
         </div>
-
         <div class="remarks">
             <p>{!! $getSetting->exam_description !!}</p>
         </div>

@@ -28,22 +28,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>0</h3>
-
-                <p>Total Classes </p>
-              </div>
-              <div class="icon">
-                <i class="nav-icon fas fa-chart"></i>
-              </div>
-              <a href="{{ url('admin/class/list') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-
-
-
+        
           <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
               <div class="inner">
@@ -93,7 +78,7 @@
               <div class="inner">
                 <h3>{{ $TotalSubject }}</h3>
 
-                <p>Total Subjects  </p>
+                <p>Total Subjects Offered </p>
               </div>
               <div class="icon">
                 <i class="nav-icon fas fa-chart"></i>

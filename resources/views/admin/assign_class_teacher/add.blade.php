@@ -39,7 +39,7 @@
                     @foreach ($getTeacher as $teacher)
                     <div>
                         <label style="font-weight: normal;">
-                            <input type="checkbox" value="{{ $teacher->id }}" name="teacher_id[]">{{ $teacher->name }} {{ $teacher->name }} {{ $teacher->last_name }} 
+                            <input type="checkbox" value="{{ $teacher->id }}" name="teacher_id[]">{{ $teacher->name }} {{ $teacher->last_name }} 
                         </label>
                     </div>
                         

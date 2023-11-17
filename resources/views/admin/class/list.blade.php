@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group col-md-3">
                   <button class="btn btn-primary" type="submit" style="margin-top: 30px">Search</button>
-                  <a href="" style="margin-top: 30px" class="btn btn-success">Reset</a>
+                  <a href="{{ url('admin/class/list') }}" style="margin-top: 30px" class="btn btn-success">Reset</a>
                 </div>
                 </div>
                

@@ -126,6 +126,7 @@
                       <th>Gender</th>
                       <th>Religion</th>
                       <th>DOB</th>
+                      <th>Blood Group</th>
                       <th>Date Of Joining</th>
                       <th>Mobile Number</th>
                       <th>Marital Status</th>
@@ -158,6 +159,7 @@
                         @endif
                         
                       </td>
+                      <td>{{ $value->blood_group }}</td>
                       <td>
                         @if (!empty($value->admission_date))
                         {{ date('d-m-Y', strtotime($value->admission_date)) }}

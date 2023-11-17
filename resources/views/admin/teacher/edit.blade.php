@@ -72,7 +72,7 @@
 
                         <div class="form-group col-md-6">
                           <label>Marital Status<span style="color: red;"></span></label>
-                          <input type="date" class="form-control" name="marital_status" value="{{ old('marital_status', $getRecord->marital_status) }}"   placeholder="Enter Mobile Number">
+                          <input type="text" class="form-control" name="marital_status" value="{{ old('marital_status', $getRecord->marital_status) }}"   placeholder="Enter Marital Status">
                           <div style="color: red">{{ $errors->first('marital_status') }}</div>
                       </div>
 
@@ -115,10 +115,15 @@
                       <input type="text" class="form-control" name="note" value="{{ old('note', $getRecord->note) }}"  placeholder="Enter Permanent Address">
                       <div style="color: red">{{ $errors->first('note') }}</div>
                   </div>
+                  
                   <div class="form-group col-md-6">
-                    <label>Religion<span style="color: red;"></span></label>
-                    <input type="text" class="form-control" name="religion" value="{{ old('religion', $getRecord->religion) }}"  placeholder="Enter religion">
-                    <div style="color: red">{{ $errors->first('religion') }}</div>
+                    <label>Blood Group<span style="color: red;">*</span></label>
+                    <select class="form-control" required name="blood_group">
+                        <option value="">Blood Group</option>
+                        <option {{ (old('blood_group', $getRecord->blood_group) == 'A') ?  'selected' : '' }} value="A">A+</option>
+                        <option {{ (old('blood_group', $getRecord->blood_group) == 'B') ?  'selected' : '' }} value="B">B</option>
+                        <option {{ (old('blood_group', $getRecord->blood_group) == 'O') ?  'selected' : '' }} value="O">O</option>
+                    </select>
                 </div>
 
                         <div class="form-group col-md-6">

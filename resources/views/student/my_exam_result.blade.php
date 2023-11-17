@@ -7,8 +7,8 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1><b>Your Academic Performance Overview <BR /> FINAL RESULTS</b></h1>
+          <div class="col-sm-12">
+         <center>   <h1><b>Your Academic Performance Overview <BR /> FINAL RESULTS</b></h1> </center>
           </div>
           
         </div>

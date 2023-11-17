@@ -43,6 +43,18 @@ class UserController extends Controller
             $setting->fevicon_icon = $fevicon_icon;
             
         }
+
+        if(!empty($request->file('login_image')))
+        {
+            $ext = $request->file('login_image')->getClientOriginalExtension();
+            $file = $request->file('login_image');
+            $randomStr = date('Ymdhis').Str::random(10);
+            $login_image = strtolower($randomStr).'.'.$ext;
+            $file->move('upload/setting/', $login_image);
+
+            $setting->login_image = $login_image;
+            
+        }
        
         $setting->save();
         return redirect()->back()->with('success', "Account Succesfully Updated.");

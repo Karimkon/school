@@ -56,6 +56,15 @@
               </div>
 
               <div class="form-group">
+                <label> Login Image <span style="color: red;"></span></label>
+                <input type="file" class="form-control" name="login_image">
+                @if (!empty($getRecord->getLoginImage()))
+                <img src="{{ $getRecord->getLoginImage() }}" style="width: 100px; height: 50px;">
+                  
+                @endif
+            </div>
+
+              <div class="form-group">
                 <label>School Name</label>
                 <input type="text" class="form-control" value="{{ $getRecord->school_name }}" name="school_name" placeholder="Enter School Name">
               </div>

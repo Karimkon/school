@@ -45,7 +45,7 @@ class ExamScheduleModel extends Model
                                 ->join('exam', 'exam.id', '=', 'exam_schedule.exam_id')
                                 ->join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'exam_schedule.class_id')
                                 ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
-                               // ->groupBy('exam_schedule.exam_id')
+                                ->groupBy('exam_schedule.exam_id')
                                 ->orderBy('exam_schedule.id', 'desc')
                                 ->get(); 
     }

@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Assign Subject list ({{ $getRecord->total() }})</h1>
+            <h1>Assign Teachers list ({{ $getRecord->total() }})</h1>
           </div>
           <div class="col-sm-6" style="text-align: right;">
             <a href="{{ url('admin/assign_class_teacher/add') }}" class="btn btn-primary">Add New Assign class to teacher</a>
@@ -82,6 +82,7 @@
                       <th>#</th>
                       <th>Class Name</th>
                       <th>Teacher Name</th>
+                      <th>Status</th>
                       <th>Created By</th>
                       <th>Created Date</th>
                       <th>Action</th>

@@ -38,4 +38,16 @@ class SettingModel extends Model
             return '';
         }
     }
+
+    public function getLoginImage()
+    {
+        if(!empty($this->login_image) && file_exists('upload/setting/'.$this->login_image))
+        {
+            return url('upload/setting/'.$this->login_image);
+        }
+        else
+        {
+            return '';
+        }
+    }
 }

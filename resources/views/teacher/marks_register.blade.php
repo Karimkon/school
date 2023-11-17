@@ -124,9 +124,18 @@
                                     <input type="text"name="mark[{{ $i }}][exam]" id="exam_{{ $student->id }}{{ $subject->subject_id }}" style='width: 100%;' class="form-control"
                                     value="{{ !empty($getMark->exam) ? $getMark->exam : '' }}" placeholder="Enter Marks Obtained">
                                 </div>
+
+                                <div style="margin-bottom: 10px">
+                                    Teacher's Comments
+                                    <textarea name="mark[{{ $i }}][teacher_comments]" id="teacher_comments_{{ $student->id }}{{ $subject->subject_id }}" style="width: 100%;"
+                                     class="form-control" rows="3" placeholder="Teacher's Comments">{{ !empty($getMark->teacher_comments) ? $getMark->teacher_comments : '' }}</textarea>
+
+                                </div>
+
             <div style="margin-bottom: 10px">
                 <button type="button" class="btn btn-primary SaveSingleSubject" id="{{ $student->id }}" 
-                data-val='{{ $subject->subject_id }}' data-schedule="{{ $subject->id }}" data-exam="{{ Request::get('exam_id') }}" data-class="{{ Request::get('class_id') }}">SAVE</button>
+                data-val='{{ $subject->subject_id }}' data-schedule="{{ $subject->id }}" data-exam="{{ Request::get('exam_id') }}" data-class="{{ Request::get('class_id') }}">SAVE
+            </button>
             </div>
             @if(!empty($getMark))
             <div style="margin-bottom: 10px">
@@ -159,7 +168,7 @@
                             @endphp
                             @endforeach
                             <td style="min-width: 300px">
-                                <button type="submit" class="btn btn-success">Save</button>
+                                <button type="submit" class="btn btn-success">Save all</button>
 
             
 <a class="btn btn-primary" target="_blank" 
@@ -244,6 +253,7 @@ Print</a>
         var home_work = $('#home_work_'+student_id+subject_id).val();
         var test_work = $('#test_work_'+student_id+subject_id).val();
         var exam = $('#exam_'+student_id+subject_id).val();
+        var teacher_comments = $('#teacher_comments_'+student_id+subject_id).val(); // Add this line
     
     $.ajax({
         type: "POST",
@@ -258,10 +268,12 @@ Print</a>
             class_work : class_work,
             home_work : home_work,
             test_work : test_work,
-            exam : exam
+            exam : exam,
+            teacher_comments: teacher_comments, // Add teacher_comments
         },
         dataType : "json",
         success: function(data){
+            console.log("AJAX Response:", data); // Add this line
             alert(data.message);
         }
     });

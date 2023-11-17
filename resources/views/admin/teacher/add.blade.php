@@ -111,10 +111,15 @@
                       <input type="text" class="form-control" name="note" value="{{ old('note') }}" required placeholder="Enter Note">
                       <div style="color: red">{{ $errors->first('note') }}</div>
                   </div>
+                  
                   <div class="form-group col-md-6">
-                    <label>Religion<span style="color: red;"></span></label>
-                    <input type="text" class="form-control" name="religion" value="{{ old('religion') }}" required placeholder="Enter religion">
-                    <div style="color: red">{{ $errors->first('religion') }}</div>
+                    <label>Blood Group<span style="color: red;">*</span></label>
+                    <select class="form-control" required name="blood_group">
+                        <option value="">Blood Group</option>
+                        <option {{ (old('blood_group') == 'A') ?  'selected' : '' }} value="A">A+</option>
+                        <option {{ (old('blood_group') == 'B') ?  'selected' : '' }} value="B">B</option>
+                        <option {{ (old('blood_group') == 'O') ?  'selected' : '' }} value="O">O</option>
+                    </select>
                 </div>
 
                         <div class="form-group col-md-6">

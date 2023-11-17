@@ -46,7 +46,21 @@ class ClassModel extends Model
 
     }
 
+// Add this new function to your ClassModel
 
+static public function getClassesForTeacher($teacherId)
+{
+    $return = ClassModel::select('class.*')
+                    ->join('users', 'users.id', 'class.created_by')
+                    ->join('assign_class_teacher', 'assign_class_teacher.class_id', 'class.id')
+                    ->where('class.is_delete', '=', 0)
+                    ->where('class.status', '=', 0)
+                    ->where('assign_class_teacher.teacher_id', '=', $teacherId)
+                    ->orderBy('class.name', 'asc')
+                    ->get();
+
+    return $return;
+}
     
     static public function getTotalClass()
     {

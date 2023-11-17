@@ -276,6 +276,8 @@ class ExaminationsController extends Controller
             $full_marks = !empty($mark['full_marks']) ? $mark['full_marks'] : 0;
             $passing_mark = !empty($mark['passing_mark']) ? $mark['passing_mark'] : 0;
 
+            $teacher_comments = !empty($mark['teacher_comments']) ? $mark['teacher_comments'] : ''; // Teacher's comments
+
             $total_mark = $class_work+$home_work+$test_work+$exam;
 
             if($full_marks >= $total_mark)
@@ -308,6 +310,7 @@ class ExaminationsController extends Controller
                 $save->full_marks = $full_marks;
                 $save->passing_mark = $passing_mark;
                 $save->exam = $exam;
+                $save->teacher_comments = $teacher_comments; // Save teacher's comments
                 $save->save();                
             }
         else
@@ -339,6 +342,7 @@ class ExaminationsController extends Controller
             $home_work = !empty($request->home_work) ? $request->home_work : 0;
             $test_work = !empty($request->test_work) ? $request->test_work : 0;
             $exam = !empty($request->exam) ? $request->exam : 0;
+            $teacher_comments = !empty($mark['teacher_comments']) ? $mark['teacher_comments'] : ''; // Teacher's comments
 
             $total_mark = $class_work+$home_work+$test_work+$exam;
 
@@ -368,9 +372,10 @@ class ExaminationsController extends Controller
                     $save->home_work = $home_work;
                     $save->test_work = $test_work;
                     $save->exam = $exam;
+                    $save->teacher_comments = $teacher_comments; // Save teacher's comments
 
                     $save->full_marks = $getExamSchedule->full_marks;
-                     $save->passing_mark = $getExamSchedule->passing_mark;
+                    $save->passing_mark = $getExamSchedule->passing_mark;
 
                     $save->save();
                     

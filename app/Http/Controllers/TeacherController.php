@@ -42,7 +42,7 @@ class TeacherController extends Controller
         {
             $teacher->date_of_birth = trim($request->date_of_birth);
         }
-        
+        $teacher->blood_group = trim($request->blood_group);
         if(!empty($request->admission_date))
         {
             $teacher->admission_date = trim($request->admission_date);
@@ -102,7 +102,7 @@ class TeacherController extends Controller
         {
             $teacher->date_of_birth = trim($request->date_of_birth);
         }
-
+        $teacher->blood_group = trim($request->blood_group);
         $teacher->religion = trim($request->religion);
         $teacher->mobile_number = trim($request->mobile_number);
         if(!empty($request->file('profile_pic')))

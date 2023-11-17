@@ -6,23 +6,67 @@
   <title>The Ultimate Academia System | Log in</title>
   @php
   $getHeaderSetting = App\Models\SettingModel::getSingle();
-@endphp
-<link href="{{ $getHeaderSetting->getFevicon() }}" rel="icon" type="image/jpg">
-  <!-- Google Font: Source Sans Pro -->
+  $settingModel = new App\Models\SettingModel(); // Create an instance of SettingModel
+  $getLoginImage = $settingModel->getLoginImage(); // Call the method on the instance
+  @endphp
+
+  <link href="{{ $getHeaderSetting->getFevicon() }}" rel="icon" type="image/jpg">
+  
+  <!-- External stylesheets -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ url ('public/plugins/fontawesome-free/css/all.min.css') }}">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="{{ url ('public/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ url ('public/dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ url('public/plugins/fontawesome-free/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ url('public/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url('public/dist/css/adminlte.min.css') }}">
+
+  <!-- Your custom styles -->
+  <style>
+    body {
+      background-image: url('/upload/setting/20231102074252eqdyqcyjwc.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .login-box {
+      background-color: rgba(255, 255, 255, 0.9); /* Add a semi-transparent white background to the login box */
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 100px; /* Adjust as needed */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow to the login box */
+    }
+
+    .login-logo {
+      font-size: 36px;
+      color: #333; /* Choose your desired color */
+    }
+
+    .login-box-msg {
+      font-size: 18px;
+    }
+
+    /* Style the input fields, buttons, and links as needed */
+    .form-control {
+      border: 1px solid #ccc;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+  </style>
 </head>
-<body class="hold-transition login-page">
+
+<body class="hold-transition login-page" style="background-image: url('{{ $getLoginImage }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 <div class="login-box">
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="" class="h1"><b>Academia</b>Login</a>
+      <a href="" class="h1"><b>Academia</b><br>Login</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>

@@ -168,7 +168,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/examinations/marks_grade/delete/{id}', [ExaminationsController::class, 'marks_grade_delete']);
 
     //ADMIN ATTENDANCE STUDENTS
-    Route::get('admin/attendance/student', [AttendanceController::class, 'AttendanceStudent']);
+    Route::get('admin/attendance/student_attendance', [AttendanceController::class, 'AttendanceStudent']);
     Route::post('admin/attendance/student/save', [AttendanceController::class, 'AttendanceStudentSubmit']);
     Route::get('admin/attendance/report', [AttendanceController::class, 'AttendanceReport']);
      
@@ -272,7 +272,7 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::get('teacher/my_exam_result/print', [ExaminationsController::class, 'myExamResultPrint']);
 
 
-    //Teache's Homework Controllers
+    //Teacher's Homework Controllers
     Route::get('teacher/homework/studenthomework', [HomeworkController::class, 'HomeworkTeacher']);
     Route::get('teacher/homework/studenthomework/add', [HomeworkController::class, 'addTeacher']);
     Route::post('teacher/ajax_get_subject', [HomeworkController::class, 'ajax_get_subject']);
@@ -285,7 +285,7 @@ Route::group(['middleware' => 'teacher'], function () {
 
     
     //Teacher's ATTENDANCE STUDENTS
-    Route::get('teacher/attendance/student', [AttendanceController::class, 'AttendanceStudent']);
+    Route::get('teacher/attendance/student', [AttendanceController::class, 'AttendanceStudentTeacher']);
     Route::post('teacher/attendance/student/save', [AttendanceController::class, 'AttendanceStudentSubmit']);
     Route::get('teacher/attendance/report', [AttendanceController::class, 'AttendanceReport']);
 
