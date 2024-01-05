@@ -42,7 +42,7 @@
                         <tr>
                             <th>Class Name</th>
                             <th>Total Fees Amount</th>
-                            <th>Total Paid Amount</th>
+                            <th>Last Paid Amount</th>
                             <th>Remaining Amount</th>
                             <th>Payment Type</th>
                             <th>Remarks</th>

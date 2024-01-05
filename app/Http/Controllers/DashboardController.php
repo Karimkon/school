@@ -35,6 +35,16 @@ class DashboardController extends Controller
 
             return view('admin.dashboard', $data);
         }
+        else if (Auth::user()->user_type == 4)
+        {
+            $data['getTotalTodayFees'] = StudentAddFeesModel::getTotalTodayFees();
+            $data['getTotalFees'] = StudentAddFeesModel::getTotalFees();
+            $data['TotalStudent'] = User::getTotalUser(2);
+            $data['TotalTeacher'] = User::getTotalUser(3);
+            $data['TotalParent'] = User::getTotalUser(5);
+
+            return view('bursar.dashboard', $data);
+        }
         else if (Auth::user()->user_type == 2)
         {
             $data['TotalPaidAmount'] = StudentAddFeesModel::TotalPaidAmountStudent(Auth::user()->id);

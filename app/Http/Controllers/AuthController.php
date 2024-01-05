@@ -28,6 +28,10 @@ class AuthController extends Controller
             {
                 return redirect('teacher/dashboard');             
             }
+            else if (Auth::user()->user_type == 4)
+            {
+                return redirect('bursar/dashboard');             
+            }
             else if(Auth::user()->user_type == 5)
             {
                 return redirect('parent/dashboard');            
@@ -51,6 +55,10 @@ class AuthController extends Controller
             else if (Auth::user()->user_type == 3)
             {
                 return redirect('teacher/dashboard');             
+            }
+            else if (Auth::user()->user_type == 4)
+            {
+                return redirect('bursar/dashboard');             
             }
             else if(Auth::user()->user_type == 5)
             {

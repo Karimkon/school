@@ -84,6 +84,12 @@ class UserController extends Controller
            return view('student.my_account', $data);
   
         }
+        else if(Auth::user()->user_type == 4)
+        {
+           return view('bursar.my_account', $data);
+  
+        }
+       
         else if(Auth::user()->user_type == 5)
         {
             return view('parent.my_account', $data);

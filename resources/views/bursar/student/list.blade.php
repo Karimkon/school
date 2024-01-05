@@ -102,7 +102,7 @@
                 </div>
                 <div class="form-group col-md-3">
                   <button class="btn btn-primary" type="submit" style="margin-top: 30px">Search</button>
-                  <a href="{{ url('admin/student/list') }}" style="margin-top: 30px" class="btn btn-success">Reset</a>
+                  <a href="{{ url('bursar/student/list') }}" style="margin-top: 30px" class="btn btn-success">Reset</a>
                 </div>
                 </div>
                
@@ -183,8 +183,6 @@
                       <td>{{ ($value->status == 0) ? 'Active': 'Inactive'}}</td>
                       <td>{{ $value->created_at }}</td>
                       <td style="min-width: 270px">
-                        <a href="{{ url('admin/student/edit/'.$value->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                        <a href="{{ url('admin/student/delete/'.$value->id) }}" class="btn btn-danger btn-sm">Delete</a>
                         <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success btn-sm">Send Message</a>
                       </td>
                     </tr>

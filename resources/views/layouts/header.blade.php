@@ -111,35 +111,60 @@
                 </p>
             </a>
         </li>
-        
-        @if(Auth::user()->user_type == 1)
+ 
+        <li class="nav-item @if(in_array(Request::segment(2), ['bursar', 'student', 'parent', 'admin'])) menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link @if(in_array(Request::segment(2), ['class'])) active @endif">
+                <i class="nav-icon fas fa-table"></i>
+                <p>
+                    SYSTEM USERS
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                      
             <li class="nav-item">
-                <a href="{{ url('admin/admin/list') }}" class="nav-link @if(Request::segment(2) == 'admin') active @endif">
+              <a href="{{ url('admin/admin/list') }}" class="nav-link @if(Request::segment(2) == 'admin') active @endif">
+                  <i class="nav-icon far fa-user"></i>
+                  <p>
+                      Admin
+                  </p>
+              </a>
+          </li>
+
+              <li class="nav-item">
+                <a href="{{ url('admin/bursar/list') }}" class="nav-link @if(Request::segment(2) == 'bursar') active @endif">
                     <i class="nav-icon far fa-user"></i>
                     <p>
-                        Admin
+                      bursar
                     </p>
                 </a>
             </li>
-        @endif
-        
-        <li class="nav-item">
-            <a href="{{ url('admin/student/list') }}" class="nav-link @if(Request::segment(2) == 'student') active @endif">
-                <i class="nav-icon far fa-user"></i>
-                <p>
-                    Students
-                </p>
-            </a>
+              
+              <li class="nav-item">
+                  <a href="{{ url('admin/student/list') }}" class="nav-link @if(Request::segment(2) == 'student') active @endif">
+                      <i class="nav-icon far fa-user"></i>
+                      <p>
+                          Students
+                      </p>
+                  </a>
+              </li>
+              
+                <li class="nav-item">
+                  <a href="{{ url('admin/parent/list') }}" class="nav-link @if(Request::segment(2) == 'parent') active @endif">
+                    <i class="nav-icon far fa-user"></i>
+                    <p>
+                      Parents
+                    </p>
+                  </a>
+                </li>
+      
+      
+            </ul>
         </li>
-        
-          <li class="nav-item">
-            <a href="{{ url('admin/parent/list') }}" class="nav-link @if(Request::segment(2) == 'parent') active @endif">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                Parents
-              </p>
-            </a>
-          </li>
+
+
+
+
 
           <li class="nav-item @if(in_array(Request::segment(2), ['class', 'teacher', 'subject', 'assign_subject', 'assign_class_teacher', 'class_timetable'])) menu-is-opening menu-open @endif">
             <a href="#" class="nav-link @if(in_array(Request::segment(2), ['class'])) active @endif">
@@ -677,6 +702,155 @@
               </p>
             </a>
           </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          @elseif(Auth::user()->user_type == 4)
+
+          <li class="nav-item">
+            <a href="{{ url('bursar/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                    Dashboard 
+                </p>
+            </a>
+        </li>
+        
+       
+        <li class="nav-item">
+            <a href="{{ url('bursar/student/list') }}" class="nav-link @if(Request::segment(2) == 'student') active @endif">
+                <i class="nav-icon far fa-user"></i>
+                <p>
+                    Students
+                </p>
+            </a>
+        </li>
+        
+          <li class="nav-item">
+            <a href="{{ url('bursar/parent/list') }}" class="nav-link @if(Request::segment(2) == 'parent') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Parents
+              </p>
+            </a>
+          </li>
+
+         
+      <li class="nav-item @if(in_array(Request::segment(2), ['communicate', 'notice_board', 'send_email'])) menu-is-opening menu-open @endif">
+        <a href="#" class="nav-link @if(in_array(Request::segment(2), ['communicate'])) active @endif">
+            <i class="nav-icon fas fa-table"></i>
+            <p>
+                SCHOOL COMMUNICATION 
+                <i class="fas fa-angle-left right"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ url('bursar/communicate/notice_board') }}" class="nav-link @if(in_array(Request::segment(2), ['communicate', 'notice_board'])) active @endif">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Notice Board</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="{{ url('bursar/communicate/send_email') }}" class="nav-link @if(in_array(Request::segment(2), ['communicate', 'send_email'])) active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Send Email</p>
+              </a>
+          </li>
+        </ul>
+    </li>
+
+
+
+  <li class="nav-item @if(in_array(Request::segment(2), ['fees_collection', 'collect_fes', 'collect_fees_report'])) menu-is-opening menu-open @endif">
+    <a href="#" class="nav-link @if(in_array(Request::segment(2), ['fees_collection'])) active @endif">
+        <i class="nav-icon fas fa-table"></i>
+        <p>
+            FEES COLLECTION 
+            <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ url('bursar/fees_collection/collect_fees') }}" class="nav-link @if(in_array(Request::segment(2), ['fees_collection', 'collect_fes'])) active @endif">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Collect Fees</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{{ url('bursar/fees_collection/collect_fees_report') }}" class="nav-link @if(in_array(Request::segment(2), ['collect_fees_report', 'collect_fes'])) active @endif">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Collect Fees Report</p>
+          </a>
+      </li>
+
+    </ul>
+</li>
+
+        
+          <li class="nav-item">
+            <a href="{{ url('bursar/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                My Account
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url('bursar/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Change Password
+              </p>
+            </a>
+          </li>
+
+
 
           @endif
 

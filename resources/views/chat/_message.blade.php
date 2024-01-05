@@ -7,7 +7,7 @@
 <div class="chat-message clearfix">
     <form action="" id="submit_message" method="post" class="mb-0">
         {{ csrf_field() }}
-        <input type="text" name="receiver_id" value="{{ $getReceiver->id }}">
+        <input type="hidden" name="receiver_id" value="{{ $getReceiver->id }}">
         
         <textarea name="message" id="ClearMessage" class="form-control" required></textarea>
         <div class="row">

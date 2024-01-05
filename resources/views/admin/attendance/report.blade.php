@@ -54,7 +54,7 @@
                     </div>
 
 
-                    <div class="form-group col-md-1">
+                    <div class="form-group col-md-2">
                         <label>Attendance Type</label>
                         <select name="attendance_type" class="form-control">
                             <option value="">Select</option>

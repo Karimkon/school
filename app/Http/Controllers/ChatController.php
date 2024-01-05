@@ -24,6 +24,8 @@ class ChatController extends Controller
             $data['getReceiver'] = User::getSingle($receiver_id);
             $data['getChat'] = ChatModel::getChat($receiver_id, $sender_id);
         }
+        $data['getChatUser'] = ChatModel::getChatUser($sender_id);
+
         return view('chat.list', $data);
     }
 
@@ -36,10 +38,7 @@ class ChatController extends Controller
         $chat->created_date = time();
         $chat->save();
 
-        $json['success'] = true;
-        echo json_encode($json);
-
-        $getChat = ChatModel::where('id', '=', $chat->id);
+        $data['getChat'] = ChatModel::where('id', '=', $chat->id->get());
 
         return response()->json([
             "status" => true,

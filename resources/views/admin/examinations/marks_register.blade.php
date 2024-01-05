@@ -124,6 +124,13 @@
                                     <input type="text"name="mark[{{ $i }}][exam]" id="exam_{{ $student->id }}{{ $subject->subject_id }}" style='width: 100%;' class="form-control"
                                     value="{{ !empty($getMark->exam) ? $getMark->exam : '' }}" placeholder="Enter Marks Obtained">
                                 </div>
+                                <div style="margin-bottom: 10px">
+                                    Teacher's Comments
+                                    <textarea name="mark[{{ $i }}][teacher_comments]" id="teacher_comments_{{ $student->id }}{{ $subject->subject_id }}" style="width: 100%;"
+                                     class="form-control" rows="3" placeholder="Teacher's Comments">{{ !empty($getMark->teacher_comments) ? $getMark->teacher_comments : '' }}</textarea>
+
+                                </div>
+
             <div style="margin-bottom: 10px">
                 <button type="button" class="btn btn-primary SaveSingleSubject" id="{{ $student->id }}" 
                 data-val='{{ $subject->subject_id }}' data-schedule="{{ $subject->id }}" data-exam="{{ Request::get('exam_id') }}" data-class="{{ Request::get('class_id') }}">SAVE</button>
