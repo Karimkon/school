@@ -14,7 +14,7 @@ class StudentAddFeesModel extends Model
         return self::find($id);
     }
 
-    static public function getRecord()
+    static public function getRecord($remove_pagination = 0)
     {
         $return = self::select('student_add_fees.*', 'class.name as class_name', 'users.name as created_name',
                  'student.name as student_name_first', 'student.last_name as student_name_last')
@@ -51,12 +51,18 @@ class StudentAddFeesModel extends Model
 
                     if(!empty(Request::get('payment_type')))
                     {
-                        $return = $return->whereDate('student_add_fees.payment_type', '<=', Request::get('payment_type'));
+                        $return = $return->where('student_add_fees.payment_type', '=', Request::get('payment_type'));
                     }
 
-                $return=$return->orderBy('student_add_fees.id', 'desc')
-                ->paginate(50);
-
+                $return=$return->orderBy('student_add_fees.id', 'desc');
+                if(!empty($remove_pagination))
+                {
+                    $return=$return->get();
+                }
+                else
+                {
+                    $return=$return->paginate(50);
+                }
                 return $return;
     }
 

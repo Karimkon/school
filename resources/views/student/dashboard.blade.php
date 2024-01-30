@@ -18,7 +18,7 @@
           <div class="col-lg-3 col-6">
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>Shs. {{ number_format($TotalPaidAmount, 2) }}</h3>
+                <h3>{{ number_format($TotalPaidAmount, 2) }} - Shs</h3>
                 <p>My Total Paid Tuition Payments</p>
               </div>
               <div class="icon">
@@ -27,8 +27,8 @@
               <a href="{{ url('student/my_fees_collection') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-
-        
+          
+          
           <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
               <div class="inner">
@@ -37,7 +37,7 @@
                 <p>Total Submitted Assignments</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="far fa-thumbs-up"></i>
               </div>
               <a href="{{ url('student/my_submitted_homework') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -66,7 +66,7 @@
                 <p>Total School Notice Board</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="d"></i>
               </div>
               <a href="{{ url('student/my_notice_board') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>

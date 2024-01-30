@@ -19,7 +19,7 @@ class StudentAttendanceModel extends Model
                     ->first();
     }
 
-    static function getRecord()
+    static function getRecord($remove_pagination = 0)
     {
         $return = self::select('student_attendance.*', 'class.name as class_name', 'student.name as student_name'
         , 'student.last_name as student_last_name', 'created_by.name as created_name')
@@ -57,9 +57,17 @@ class StudentAttendanceModel extends Model
                     {
                         $return=$return->where('student_attendance.attendance_type', '=', Request::get('attendance_type'));      
                     }
-                  $return=$return  ->orderBy('student_attendance.id', 'desc')
-                    ->paginate(50);
-            return $return;
+                  $return=$return  ->orderBy('student_attendance.id', 'desc');
+                  
+                  if(!empty($remove_pagination))
+                  {
+                      $return=$return->get();
+                  }
+                  else
+                  {
+                      $return=$return->paginate(50);
+                  }
+                  return $return;
     }
 }
 

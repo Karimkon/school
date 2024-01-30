@@ -98,10 +98,18 @@
                 <h3 class="card-title">Payment Details</h3>
                 <form style="float: right;" action="{{ url('admin/fees_collection/export_collect_fees_report') }}" method="post">
                   {{ csrf_field() }}
-                  <button class="btn btn-primary">Export as Excel</button>
+                  <input type="hidden" value="{{ Request::get('student_id') }}" name="student_id">
+                  <input type="hidden" value="{{ Request::get('student_name') }}" name="student_name">
+                  <input type="hidden" value="{{ Request::get('student_last_name') }}" name="student_last_name">
+                  <input type="hidden" value="{{ Request::get('class_id') }}" name="class_id">
+                  <input type="hidden" value="{{ Request::get('payment_type') }}" name="payment_type">
+                  <input type="hidden" value="{{ Request::get('start_created_date') }}" name="start_created_date">
+                  <input type="hidden" value="{{ Request::get('end_created_date') }}" name="end_created_date">
+
+                  <button type="submit" class="btn btn-primary">Export as Excel</button>
                 </form>
               </div>
-              <div class="card-body p-0">
+              <div class="card-body p-0 table-responsive">
                 <table class="table">
                     <thead>
                         <tr>

@@ -17,6 +17,13 @@ class CommunicateController extends Controller
         $data['header_title'] = 'Send  Emails';
         return view('admin.communicate.send_email', $data);  
     }
+
+    public function SendEmailBursar()
+    {
+        $data['header_title'] = 'Bursar Send  Emails';
+        return view('bursar.communicate.send_email', $data);  
+    }
+
     public function SearchUser(Request $request)
     {
         $json = array();
@@ -39,6 +46,11 @@ class CommunicateController extends Controller
                 else if($value->user_type == 1)
                 {
                     $type = "Admin";
+                }
+
+                else if($value->user_type == 4)
+                {
+                    $type = "Bursar";
                 }
                 
                 else if($value->user_type == 5)
@@ -70,10 +82,24 @@ class CommunicateController extends Controller
         $data['header_title'] = 'Notice board';
         return view('admin.communicate.notice_board.list', $data);            
     }
+
+    public function SMS()
+    {
+        $data['getRecord'] = NoticeBoardModel::getRecord();
+        $data['header_title'] = 'SMS Centre';
+        return view('bursar.communicate.sms.list', $data);            
+    }
+
     public function AddNoticeBoard()
     {
         $data['header_title'] = 'Add New Notice';
         return view('admin.communicate.notice_board.add', $data);            
+    }
+
+    public function findSMSPage()
+    {
+        $data['header_title'] = 'Add New Notice';
+        return view('bursar.communicate.sms.add', $data);            
     }
     
     public function InsertNoticeBoard(Request $request)
@@ -98,6 +124,31 @@ class CommunicateController extends Controller
 
         }
         return redirect('admin/communicate/notice_board')->with("success", 'Notice Board Message succesfully created');
+
+    }
+
+    public function SendSMS(Request $request)
+    {
+        $save = new NoticeBoardModel; 
+        $save->title = $request->title;
+        $save->notice_date = $request->notice_date;
+        $save->publish_date = $request->publish_date;
+        $save->message = $request->message;
+        $save->created_by = Auth::user()->id;
+        $save->save();
+
+        if(!empty($request->message_to))
+        {
+            foreach($request->message_to as $message_to)
+            {
+                $message = new NoticeBoardMessageModel;
+                $message->notice_board_id = $save->id;
+                $message->message_to = $message_to;
+                $message->save();
+            }
+
+        }
+        return redirect('bursar/communicate/sms')->with("success", 'SMS succesfully sent');
 
     }
 

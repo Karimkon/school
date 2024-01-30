@@ -7,6 +7,8 @@ use App\Models\ClassModel;
 use App\Models\StudentAddFeesModel;
 use App\Models\User;
 use App\Models\SettingModel;
+use Excel;
+use App\Exports\ExportCollectFees;
 use Stripe\Stripe;
 use Session;    
 use Auth;
@@ -25,6 +27,19 @@ class FeesCollectionController extends Controller
         return view('admin.fees_collection.collect_fees', $data);
     }
 
+    public function collect_fees_bursar(Request $request)
+    {
+        $data['getClass'] = ClassModel::getClass();
+
+        if(!empty($request->all()))
+        {
+            $data['getRecord'] = User::getCollectFeesStudent();
+        }
+        $data['header_title'] = "Collect Fees List";
+        return view('bursar.fees_collection.collect_fees', $data);
+    }
+    
+
     public function collect_fees_report()
     {
         $data['getClass'] = ClassModel::getClass();
@@ -41,6 +56,18 @@ class FeesCollectionController extends Controller
         $data['header_title'] = "Add Fees Collection";
         $data['paid_amount'] = StudentAddFeesModel::getPaidAmount($student_id, $getStudent->class_id);
         return view('admin.fees_collection.add_collect_fees', $data);
+
+    }
+
+    //ursar side
+    public function collect_fees_add_bursar($student_id)
+    {
+        $data['getFees'] = StudentAddFeesModel::getFees($student_id); 
+        $getStudent = User::getSingleClass($student_id);
+        $data['getStudent'] = $getStudent;
+        $data['header_title'] = "Add Fees Collection";
+        $data['paid_amount'] = StudentAddFeesModel::getPaidAmount($student_id, $getStudent->class_id);
+        return view('bursar.fees_collection.add_collect_fees', $data);
 
     }
 
@@ -243,6 +270,7 @@ class FeesCollectionController extends Controller
 
     public function export_collect_fees_report(Request $request)
     {
-
+    return Excel::download(new ExportCollectFees, 'FeesCollectionReport_'.date('d-m-Y').'.xlsx');
     }
+
 }

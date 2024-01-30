@@ -27,7 +27,7 @@
                 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">{{ $value['name'] }}</h3>
+                <h2 class="card-title"><strong>{{ $value['name'] }}</strong></h2> 
               </div>
               
               <!-- /.card-header -->

@@ -7,6 +7,8 @@ use App\Models\ClassModel;
 use App\Models\User;
 use App\Models\StudentAttendanceModel;
 use App\Models\AssignClassTeacherModel;
+use Excel;
+use App\Exports\ExportAttendance;
 use Auth;
 
 class AttendanceController extends Controller
@@ -68,5 +70,10 @@ class AttendanceController extends Controller
         $data['header_title'] = "STUDENT ATTENDANCE";
         return view('teacher.attendance.student', $data);
 
+    }
+
+    public function AttendanceStudentExportExcel(Request $request)
+    {
+         return Excel::download(new ExportAttendance, 'AttendanceReport_'.date('d-m-Y').'.xlsx');
     }
 }

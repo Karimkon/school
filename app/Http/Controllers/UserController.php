@@ -175,6 +175,29 @@ class UserController extends Controller
         return redirect()->back()->with('success', "Admin Successfully updated.");
     }
     
+    
+    public function UpdateMyAccountBursar(Request $request)
+    {
+        $id = Auth::user()->id;
+    
+        request()->validate([
+            'email' => 'required|email|unique:users,email,'.$id,
+        ]);
+    
+        $admin = User::find($id); // Retrieve the admin user based on their ID
+    
+        if (!$admin) {
+            // Handle the case where the admin user is not found
+            // You can return an error response or redirect to an error page
+        }
+    
+        $admin->name = trim($request->name);
+        $admin->email = trim($request->email);
+        $admin->save();
+    
+        return redirect()->back()->with('success', "Your Account Successfully updated.");
+    }
+    
 
 
     public function UpdateMyaccountStudent(Request $request)

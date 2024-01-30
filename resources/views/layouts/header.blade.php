@@ -1,9 +1,10 @@
+  
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+<a class="nav-link toggle-button" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="font-size: 28px;">&#x2261;</i></a>
       </li>
       
     </ul>
@@ -68,19 +69,60 @@
           <a href="{{ url('chat') }}" class="dropdown-item dropdown-footer">See All Messages</a>
         </div>
       </li>
+      
+            <!-- User Profile Dropdown Menu -->
+<li class="nav-item dropdown">
+     @php
+            $accountUrl = '';
+            switch (Auth::user()->user_type) {
+                case 1:
+                    $accountUrl = url('admin/account');
+                    break;
+                case 2:
+                    $accountUrl = url('student/account');
+                    break;
+                case 3:
+                    $accountUrl = url('teacher/account');
+                    break;
+                case 4:
+                    $accountUrl = url('bursar/account');
+                    break;
+                case 5:
+                    $accountUrl = url('parent/account');
+                    break;
+                // Add more cases for other user types as needed
+            }
+        @endphp
+
+  <a class="nav-link" data-toggle="dropdown" href="#">
+    <i class="fas fa-user"></i>
+    <span class="nav-profile-dropdown-icon" style="font-size: 24px;"> <!-- Adjust the font size as needed -->
+        <!-- Example: use a down arrow character -->
+        <strong>&#x2304;</strong>    <!-- Unicode character for a down arrow -->
+    </span>
+</a>
+
+    <div class="dropdown-menu dropdown-menu-right">
+        <a class="nav-link nav-link-user" href="{{ $accountUrl }}" class="dropdown-item">My Profile</a>
+        <!-- Add other user-related links here if needed -->
+        <div class="dropdown-divider"></div>
+        <a href="{{ url('logout') }}" class="dropdown-item">Logout</a>
+</li>
+
      
 
     </ul>
+    </div>
   </nav>
   <!-- /.navbar -->
 
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4 collapsed">
     <!-- Brand Logo -->
     <a href="javascript:;" class="brand-link" style="text-align: center">
       @if(!empty($getHeaderSetting->getLogo()))
-      <img src="{{ $getHeaderSetting->getLogo() }}" alt="MISS" style="width:auto;height:60px;border-radius:5px;"><center>ACADEMIA</center>
+      <img src="{{ $getHeaderSetting->getLogo() }}" alt="MISS" style="width:auto;height:30px;border-radius:5px;"><center>ACADEMIA</center>
       @else
       <span class="brand-text font-weight-light" style="font-weight: bold !important;font-size: 20px">ACADEMIA</span>
       @endif
@@ -390,14 +432,6 @@
 </li>
 
         
-          <li class="nav-item">
-            <a href="{{ url('admin/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                My Account
-              </p>
-            </a>
-          </li>
 
           <li class="nav-item">
             <a href="{{ url('admin/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
@@ -524,14 +558,6 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="{{ url('teacher/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                My Account
-              </p>
-            </a>
-          </li>
 
           <li class="nav-item">
             <a href="{{ url('teacher/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
@@ -637,15 +663,6 @@
             </a>
           </li>
 
-
-          <li class="nav-item">
-            <a href="{{ url('student/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                My Account
-              </p>
-            </a>
-          </li>
 
           <li class="nav-item">
             <a href="{{ url('student/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
@@ -769,7 +786,7 @@
         </li>
         
           <li class="nav-item">
-            <a href="{{ url('bursar/parent/list') }}" class="nav-link @if(Request::segment(2) == 'parent') active @endif">
+            <a href="{{ url('bursar/parent/listb') }}" class="nav-link @if(Request::segment(2) == 'parent') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
                 Parents
@@ -788,9 +805,9 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ url('bursar/communicate/notice_board') }}" class="nav-link @if(in_array(Request::segment(2), ['communicate', 'notice_board'])) active @endif">
+                <a href="{{ url('bursar/communicate/sms') }}" class="nav-link @if(in_array(Request::segment(2), ['communicate', 'sms'])) active @endif">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Notice Board</p>
+                    <p>SMS Center</p>
                 </a>
             </li>
 
@@ -831,16 +848,33 @@
     </ul>
 </li>
 
-        
-          <li class="nav-item">
-            <a href="{{ url('bursar/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                My Account
-              </p>
-            </a>
-          </li>
 
+<li class="nav-item @if(in_array(Request::segment(2), ['inventory', 'procurement', 'budget'])) menu-is-opening menu-open @endif">
+  <a href="#" class="nav-link @if(in_array(Request::segment(2), ['inventory'])) active @endif">
+      <i class="nav-icon fas fa-table"></i>
+      <p>
+          INVENTORY / PROCUREMENT 
+          <i class="fas fa-angle-left right"></i>
+      </p>
+  </a>
+  <ul class="nav nav-treeview">
+      <li class="nav-item">
+          <a href="{{ url('bursar/inventory/procurement') }}" class="nav-link @if(in_array(Request::segment(2), ['procurement'])) active @endif">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Procurement</p>
+          </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="{{ url('bursar/inventory/budget') }}" class="nav-link @if(in_array(Request::segment(2), ['budget'])) active @endif">
+            <i class="nav-icon fas fa-money"></i>
+            <p>Budget</p>
+        </a>
+    </li>
+
+  </ul>
+</li>
+        
           <li class="nav-item">
             <a href="{{ url('bursar/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
               <i class="nav-icon far fa-user"></i>

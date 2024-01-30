@@ -1,37 +1,37 @@
 @extends('layouts.app')
-@section('content')
-   
-   
-   <div class="content-wrapper">
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-12">
-            <h1 class="m-0">Dashboard</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>Shs. {{ number_format($getTotalFees, 2) }}</h3>
-                <p>All Total Recieved Payments</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="{{ url('admin/fees_collection/collect_fees_report') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
 
-          <div class="col-lg-3 col-6">
+@section('content')
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1 class="m-0">Dashboard</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ number_format($getTotalFees, 2) }} UGX</h3>
+                            <p>All Total Received Payments</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="{{ url('admin/fees_collection/collect_fees_report') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+          <div class="col-lg-3 col-md-6">
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>Shs. {{ number_format($getTotalTodayFees, 2) }}</h3>
+                <h3>{{ number_format($getTotalTodayFees, 2) }} UGX</h3>
                 <p>Today's Total Recieved Payments</p>
               </div>
               <div class="icon">
@@ -41,7 +41,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-md-6">
             <div class="small-box bg-success">
               <div class="inner">
                 <h3>{{ $TotalAdmin }}</h3>
@@ -56,7 +56,7 @@
           </div>
 
 
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-md-6">
             <div class="small-box bg-success">
               <div class="inner">
                 <h3>{{ $TotalTeacher }}</h3>
@@ -70,7 +70,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-md-6">
             <div class="small-box bg-success">
               <div class="inner">
                 <h3>{{ $TotalStudent }}</h3>
@@ -85,7 +85,7 @@
           </div>
 
 
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-md-6">
             <div class="small-box bg-success">
               <div class="inner">
                 <h3>{{ $TotalParent }}</h3>
@@ -100,7 +100,7 @@
           </div>
 
 
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-md-6">
             <div class="small-box bg-success">
               <div class="inner">
                 <h3>{{ $TotalSubject }}</h3>
@@ -115,7 +115,7 @@
           </div>
 
 
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-md-6">
             <div class="small-box bg-success">
               <div class="inner">
                 <h3>{{ $TotalClass }}</h3>
@@ -131,7 +131,7 @@
 
 
 
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-md-6">
             <div class="small-box bg-success">
               <div class="inner">
                 <h3>{{ $TotalExam }}</h3>

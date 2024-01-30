@@ -21,6 +21,8 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\HomeworkController;
 use App\Http\Controllers\FeesCollectionController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\BudgetController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,6 +55,7 @@ Route::group(['middleware' => 'common'], function () {
     Route::post('submit_message', [ChatController::class, 'submit_message']); 
     Route::post('get_chat_windows', [ChatController::class, 'get_chat_windows']); 
     Route::post('get_chat_search_user', [ChatController::class, 'get_chat_search_user']); 
+
 
 });
 
@@ -180,6 +183,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/attendance/student_attendance', [AttendanceController::class, 'AttendanceStudent']);
     Route::post('admin/attendance/student/save', [AttendanceController::class, 'AttendanceStudentSubmit']);
     Route::get('admin/attendance/report', [AttendanceController::class, 'AttendanceReport']);
+    Route::post('admin/attendance/report_export_excel', [AttendanceController::class, 'AttendanceStudentExportExcel']);
+
      
     
     
@@ -221,9 +226,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/fees_collection/export_collect_fees_report', [FeesCollectionController::class, 'export_collect_fees_report']);
 
 
-
-
-    
     
     
 });
@@ -330,35 +332,47 @@ Route::group(['middleware' => 'parent'], function () {
 Route::group(['middleware' => 'bursar'], function () {
 
     Route::get('bursar/dashboard', [DashboardController::class, 'dashboard']); 
-    Route::get('bursar/student/list', [StudentController::class, 'list']); 
-    Route::get('bursar/parent/list', [ParentController::class, 'list']); 
-    Route::get('admin/parent/my-student/{id}', [ParentController::class, 'myStudent']);
+    Route::get('bursar/student/list', [StudentController::class, 'bursar_list']); 
+    Route::get('bursar/parent/listb', [ParentController::class, 'list_bursar']); 
+    Route::get('bursar/parent/my-student/{id}', [ParentController::class, 'myStudentBursar']);
 
     //COMMUNICATION MODULE URLS
-    Route::get('bursar/communicate/notice_board', [CommunicateController::class, 'NoticeBoard']);
-    Route::get('bursar/communicate/notice_board/add', [CommunicateController::class, 'AddNoticeBoard']);
-    Route::post('bursar/communicate/notice_board/add', [CommunicateController::class, 'InsertNoticeBoard']);
-
-    Route::get('bursar/communicate/notice_board/edit/{id}', [CommunicateController::class, 'EditNoticeBoard']);
-    Route::post('bursar/communicate/notice_board/edit/{id}', [CommunicateController::class, 'InsertNoticeBoard']);
-    Route::post('bursar/communicate/notice_board/edit/{id}', [CommunicateController::class, 'UpdateNoticeBoard']);
-    Route::get('bursar/communicate/notice_board/delete/{id}', [CommunicateController::class, 'DeleteNoticeBoard']);
+    Route::get('bursar/communicate/sms', [CommunicateController::class, 'SMS']);
+    Route::get('bursar/communicate/sms/add', [CommunicateController::class, 'findSMSPage']);
+    Route::post('bursar/communicate/sms/add', [CommunicateController::class, 'SendSMS']);
 
     //Send Emails routes
-    Route::get('bursar/communicate/send_email', [CommunicateController::class, 'SendEmail']);
+    Route::get('bursar/communicate/send_email', [CommunicateController::class, 'SendEmailBursar']);
     Route::post('bursar/communicate/send_email', [CommunicateController::class, 'SendEmailUser']);
     Route::get('bursar/communicate/search_user', [CommunicateController::class, 'SearchUser']);
 
      //Bursar Fees Collection Controllers
-     Route::get('bursar/fees_collection/collect_fees', [FeesCollectionController::class, 'collect_fees']);
+     Route::get('bursar/fees_collection/collect_fees', [FeesCollectionController::class, 'collect_fees_bursar']);
      Route::get('bursar/fees_collection/collect_fees_report', [FeesCollectionController::class, 'collect_fees_report']);
-     Route::get('bursar/fees_collection/collect_fees/add_fees/{student_id}', [FeesCollectionController::class, 'collect_fees_add']);
+     Route::get('bursar/fees_collection/collect_fees/add_fees/{student_id}', [FeesCollectionController::class, 'collect_fees_add_bursar']);
      Route::post('bursar/fees_collection/collect_fees/add_fees/{student_id}', [FeesCollectionController::class, 'collect_fees_insert']);
+     
+     // Inventory Routes 
+    Route::get('bursar/inventory/procurement', [InventoryController::class, 'list']); 
+    Route::get('bursar/inventory/add', [InventoryController::class, 'add']); 
+    Route::post('bursar/inventory/add', [InventoryController::class, 'insert']); 
+    Route::get('bursar/inventory/edit/{id}', [InventoryController::class, 'edit']); 
+    Route::post('bursar/inventory/edit/{id}', [InventoryController::class, 'update']); 
+    Route::get('bursar/inventory/delete/{id}', [InventoryController::class, 'delete']); 
+
+    //Budget
+    Route::get('bursar/inventory/budget', [BudgetController::class, 'budget_list']); 
+    Route::get('bursar/inventory/addbudget', [BudgetController::class, 'add']); 
+    Route::post('bursar/inventory/addbudget', [BudgetController::class, 'insert']); 
+    Route::get('bursar/inventory/editbudget/{id}', [BudgetController::class, 'edit']); 
+    Route::post('bursar/inventory/editbudget/{id}', [BudgetController::class, 'update']); 
+    Route::get('bursar/inventory/deletebudget/{id}', [BudgetController::class, 'delete']); 
  
    
      
     //Bursar Account Edit Urls
     Route::get('bursar/account', [UserController::class, 'Myaccount']);
-    Route::post('bursar/account', [UserController::class, 'UpdateMyAccountAdmin']);
-
+    Route::post('bursar/account', [UserController::class, 'UpdateMyAccountBursar']);
+    Route::get('bursar/change_password', [UserController::class, 'change_password']);
+    Route::post('bursar/change_password', [UserController::class, 'update_change_password']);
 });

@@ -22,7 +22,8 @@ class HomeworkModel extends Model
                 ->join('users', 'users.id', '=', 'homework.created_by')
                 ->join('class', 'class.id', '=', 'homework.class_id')
                 ->join('subject', 'subject.id', '=', 'homework.subject_id')
-                ->where('homework.is_delete', '=', 0);
+                ->where('homework.is_delete', '=', 0)
+                ->groupBy('homework.class_id');
                 if(!empty(Request::get('class_name')))
                     {
                         $return = $return->where('class.name', 'like', '%'.Request::get('class_name').'%');
@@ -52,7 +53,8 @@ class HomeworkModel extends Model
                 ->join('class', 'class.id', '=', 'homework.class_id')
                 ->join('subject', 'subject.id', '=', 'homework.subject_id')
                 ->whereIn('homework.class_id', $class_ids)
-                ->where('homework.is_delete', '=', 0);
+                ->where('homework.is_delete', '=', 0)
+                ->groupBy('homework.id');
                 if(!empty(Request::get('class_name')))
                     {
                         $return = $return->where('class.name', 'like', '%'.Request::get('class_name').'%');
@@ -83,7 +85,6 @@ class HomeworkModel extends Model
                 ->join('subject', 'subject.id', '=', 'homework.subject_id')
                 ->where('homework.class_id', '=', $class_id)
                 ->where('homework.is_delete', '=', 0)
-                
                 ->whereNotIn('homework.id', function($query) use ($student_id){
                     $query->select('homework_submit.homework_id')
                           ->from('homework_submit')

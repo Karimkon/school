@@ -18,6 +18,13 @@ class StudentController extends Controller
         return view('admin.student.list', $data);
     } 
 
+    public function bursar_list()
+    {
+        $data['getRecord'] = User::getStudent();
+        $data['header_title'] = "Student's List";
+        return view('bursar.student.list', $data);
+    } 
+
     public function add()
     {
         $data['getClass'] = ClassModel::getClass();

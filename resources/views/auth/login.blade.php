@@ -82,14 +82,16 @@
             </div>
           </div>
         </div>
+
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password">
+          <input type="password" class="form-control" name="password" id="password" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+              <span id="togglePassword" class="fas fa-eye" onclick="togglePasswordField()"></span>
             </div>
           </div>
         </div>
+        
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
@@ -126,5 +128,23 @@
 <script src="{{ url ('public/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script type="{{ url ('public/dist/js/adminlte.min.js') }}"></script>
+
+<script>
+  function togglePasswordField() {
+    var passwordField = document.getElementById("password");
+    var toggleIcon = document.getElementById("togglePassword");
+  
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      toggleIcon.classList.remove("fa-eye");
+      toggleIcon.classList.add("fa-eye-slash");
+    } else {
+      passwordField.type = "password";
+      toggleIcon.classList.remove("fa-eye-slash");
+      toggleIcon.classList.add("fa-eye");
+    }
+  }
+  </script>
+  
 </body>
 </html>

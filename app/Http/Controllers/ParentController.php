@@ -17,6 +17,14 @@ class ParentController extends Controller
         return view('admin.parent.list', $data);
     } 
 
+    
+    public function list_bursar()
+    {
+        $data['getRecord'] = User::getParent();
+        $data['header_title'] = "Parents List";
+        return view('bursar.parent.listb', $data);
+    } 
+
     public function add()
     {
         $data['header_title'] = "Add New Parent";
@@ -140,6 +148,17 @@ class ParentController extends Controller
         $data['getRecord'] = User::getMyStudent($id);
         $data['header_title'] = "Assign Parents to student List";
         return view('admin.parent.my_student', $data);
+
+    }
+
+    public function myStudentBursar($id)
+    {
+        $data['parent_id'] = $id;
+        $data['getParent'] = User::getSingle($id);
+        $data['getSearchStudent'] = User::getSearchStudent();
+        $data['getRecord'] = User::getMyStudent($id);
+        $data['header_title'] = "Parents and their students List";
+        return view('bursar.parent.my_student', $data);
 
     }
 

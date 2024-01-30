@@ -179,7 +179,7 @@
 
 .chat .chat-history .other-message:after {
     border-bottom-color: #e8f1f3;
-    left: 93%
+    left: 85%
 }
 
 .chat .chat-message {
@@ -293,15 +293,17 @@
                         <div id="plist" class="people-list">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                    <span class="input-group-text" id="getSearchUser"><i class="fa fa-search"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input type="text" id="getSearch" class="form-control" placeholder="Search...">
+                                <input type="hidden" id="getReceiverIDDynamic" value="{{ $receiver_id }}">
+
                             </div>
-                            <ul class="list-unstyled chat-list mt-2 mb-0">
+                            <ul class="list-unstyled chat-list mt-2 mb-0" id="getSearchUserDynamic">
                                @include('chat._user')
                             </ul>
                         </div>
-                        <div class="chat">
+                        <div class="chat" id="getChatMessageAll">
                             @if(!empty($getReceiver))
                             
                             @include('chat._message')
@@ -318,33 +320,100 @@
   </section>
 </div>
 @endsection
+@section('script')
 <script type="text/javascript">
-    
-        $('body').delegate('#submit_message', 'submit',  function(e) {
-            e.preventDefault();
-    
-            $.ajax({
-                type: 'POST',
-                url: "{{ url('submit_message') }}",
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                dataType: 'json',
-                success: function(data) {
-                    $('#AppendMessage').append(data.success);
-                    $('#ClearMessage').val('');
-                    scrolldown()
-                },
-                error: function(data) {
-                    // Handle error
-                },
-            });
+    $('body').delegate('.getChatWindows', 'click', function (e) {
+        e.preventDefault();
+        var receiver_id = $(this).attr('id');
+        $('#getReceiverIDDynamic').val(receiver_id);
+        $('.getChatWindows').removeClass('active');
+        $(this).addClass('active');
+        $.ajax({
+            type: 'POST',
+            url: "{{ url('get_chat_windows') }}",
+            data: {
+                'receiver_id': receiver_id,
+                '_token': "{{ csrf_token() }}"
+            },
+            dataType: 'json',
+            success: function (data) {
+                $('#ClearMessage' + receiver_id).hide();
+                $('#getChatMessageAll').html(data.success);
+                window.history.pushState("", "", "{{ url('chat?receiver_id=') }}" + data.receiver_id);
+                scrolldown();
+            },
+            error: function (data) {
+                // Handle error
+            },
         });
+    });
 
-    function scrolldown()
-    {
-        $('.chat-history').animate({scrollTop: $('.chat-history').prop("scrollHeight")+30000}, 500);
+    $('body').delegate('#getSearchUser', 'click', function (e) {
+        var search = $('#getSearch').val();
+        var receiver_id = $('#getReceiverIDDynamic').val();
+        $.ajax({
+            type: 'POST',
+            url: "{{ url('get_chat_search_user') }}",
+            data: {
+                'search': search,
+                'receiver_id': receiver_id,
+                '_token': "{{ csrf_token() }}"
+            },
+            dataType: 'json',
+            success: function (data) {
+                $('#ClearMessage' + receiver_id).hide();
+                $('#getChatMessageAll').html(data.success);
+                window.history.pushState("", "", "{{ url('chat?receiver_id=') }}" + data.receiver_id);
+                $('#getSearchUserDynamic').html(data.success);
+                scrolldown();
+            },
+            error: function (data) {
+                // Handle error
+            },
+        });
+    });
+
+     $('body').delegate('#submit_message', 'submit', function (e) {
+        e.preventDefault();
+        var receiver_id = $('#getReceiverIDDynamic').val();
+        var formData = new FormData(this);
+
+        $.ajax({
+            type: 'POST',
+            url: "{{ url('submit_message') }}",
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function (data) {
+                $('#AppendMessage').append(data.success);
+                $('#ClearMessage').val('');
+                $('#file_name').val('');
+                $('#getFileName').html('');
+                scrolldown();
+            },
+            error: function (data) {
+                // Handle error
+            },
+        });
+    });
+
+    $('body').delegate('#OpenFile', 'click', function (e) {
+        $('#file_name').trigger('click');
+    });
+
+    $('body').delegate('#file_name', 'change', function (e) {
+        var filename = this.files[0].name;
+        $('#getFileName').html(filename);
+    });
+
+    function scrolldown() {
+        $('.chat-history').animate({ scrollTop: $('.chat-history').prop("scrollHeight") + 30000 }, 500);
     }
+
+    // Initial call to scrolldown
     scrolldown();
-    </script>
+</script>
+@endsection
+
     

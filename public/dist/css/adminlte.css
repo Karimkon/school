@@ -307,6 +307,13 @@ fieldset {
   border: 0;
 }
 
+/* Custom styles for the user profile link */
+.nav-link-user {
+  font-size: 20px; /* Adjust the font size as needed */
+  color: #555; /* Set the desired text color */
+}
+
+
 legend {
   display: block;
   width: 100%;
@@ -1972,6 +1979,8 @@ pre code {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  } .small-box .inner h3 {
+    font-size: 18px; /* Adjust the font size as needed */
   }
   .table-responsive-md > .table-bordered {
     border: 0;
@@ -4317,6 +4326,39 @@ input[type="button"].btn-block {
   color: #6c757d;
   pointer-events: none;
   cursor: default;
+}
+
+/* Existing styles */
+
+/* ... */
+
+/* Add custom styles to the toggle button */
+.nav-link.toggle-button {
+    color: #000; /* Set the desired color */
+    background-color: #fff; /* Set the desired background color */
+    /* Add any additional styles as needed */
+}
+
+.nav-link.toggle-button .fas {
+    color: #000; /* Set the desired color for the icon */
+}
+
+.nav-link.toggle-button span {
+    color: #000; /* Set the desired color for the text */
+}
+
+/* Styles for the toggle button */
+.navbar-nav .nav-link[data-widget="pushmenu"] {
+    color: #000; /* Set the desired color */
+    font-size: 1.5rem; /* Set the desired font size */
+    /* Add any additional styles as needed */
+}
+
+/* Hover and focus styles for the toggle button */
+.navbar-nav .nav-link[data-widget="pushmenu"]:hover,
+.navbar-nav .nav-link[data-widget="pushmenu"]:focus {
+    background-color: #eee; /* Set the desired background color on hover or focus */
+    /* Add any additional hover/focus styles as needed */
 }
 
 .nav-tabs {

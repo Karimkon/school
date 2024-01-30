@@ -5,48 +5,44 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-12">
-         <center>   <h1><b>Your Academic Performance Overview <BR /> FINAL RESULTS</b></h1> </center>
-          </div>
-          
-        </div>
-      </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h1><b>Your Academic Performance Overview <BR /> FINAL RESULTS</b></h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6">
-          </div>
-
-          @foreach ($getRecord as $value)
-            
-          <div class="col-md-12">
-            <div class="card">     
-              <div class="card-header">
-                <h3 class="card-title">{{ $value['exam_name'] }} </h3>
-
-                <a class="btn btn-primary btn-sm" style="float: right;" target="_blank" href="{{ url('student/my_exam_result/print?exam_id='.$value['exam_id'].'&student_id='.Auth::user()->id) }}">Print</a>
-              </div> 
-              <div class="card-body p-0">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Exams Done</th>
-                      <th>Class Work</th>
-                      <th>Test Work</th>
-                      <th>Home Work</th>
-                      <th>Final Exam </th>
-                      <th>Total Score </th>
-                      <th>Passing Mark </th>
-                      <th>Full Mark</th>
-                      <th>Result</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+        <div class="container-fluid">
+            <div class="row">
+                @foreach ($getRecord as $value)
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">{{ $value['exam_name'] }} </h3>
+                                <a class="btn btn-primary btn-sm float-right"
+                                    href="{{ url('student/my_exam_result/print?exam_id='.$value['exam_id'].'&student_id='.Auth::user()->id) }}"
+                                    target="_blank">Print</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Exams Done</th>
+                                                <th>Class Work</th>
+                                                <th>Test Work</th>
+                                                <th>Home Work</th>
+                                                <th>Final Exam </th>
+                                                <th>Total Score </th>
+                                                <th>Passing Mark </th>
+                                                <th>Full Mark</th>
+                                                <th>Result</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                     @php
                        $total_score = 0;
                        $full_marks = 0;
@@ -102,17 +98,15 @@
                           <span style="color: red">Fail</span>
                          @endif</b></td>
                     </tr>
-                  </tbody>  
-                </table>
-              </div>
-              </div>
+                 </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-
-            @endforeach
-          </div>
         </div>
-
-      </div>
     </section>
-  </div>
+</div>
 @endsection

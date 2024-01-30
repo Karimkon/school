@@ -74,9 +74,11 @@
                                                 <td>{{ $value->weight }}</td>
                                                 <td style="min-width: 400px;">
 
-                                                    <a class="btn btn-primary btn-sm" href="{{ url('parent/my_student/subject/'.$value->id) }}"> subjects Offered</a>
-                                                    <a class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_result/'.$value->id) }}"> Exam Results</a>
-                                                    <a class="btn btn-primary btn-sm" href="{{ url('parent/my_student/fees_collection/'.$value->id) }}"> Pay Student's Fees</a>
+                                                    <a style="margin-bottom: 10px;" class="btn btn-primary btn-sm" href="{{ url('parent/my_student/subject/'.$value->id) }}"> subjects Offered</a>
+                                                    <a style="margin-bottom: 10px;"  class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_result/'.$value->id) }}"> Exam Results</a>
+                                                    <a style="margin-bottom: 10px;"  class="btn btn-primary btn-sm" href="{{ url('parent/my_student/fees_collection/'.$value->id) }}"> Pay Student's Fees</a>
+                                                    <a style="margin-bottom: 10px;"  href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success btn-sm">Send Message</a>
+
 
                                                 </td>
                                             </tr>

@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Bursar Portal Total : ( {{ $getRecord->total() }} )</h1>
+            <h1>Bursars Total : ( {{ $getRecord->total() }} )</h1>
           </div>
           <div class="col-sm-6" style="text-align: right;">
             <a href="{{ url('admin/bursar/add') }}" class="btn btn-primary">Add New Bursar</a>
@@ -28,7 +28,7 @@
               <h3 class="card-title">Search bursar</h3>
             </div>
             <form method="get" action="">
-              <div class="card-body">
+              <div class="card-body p-0 table-responsive">
                 <div class="row">
                 <div class="form-group col-md-3">
                   <label>Name</label>

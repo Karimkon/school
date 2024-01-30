@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add New Notice Board</h1>
+            <h1>Send SMS</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -33,18 +33,6 @@
                     <textarea id="compose-textarea" name="message" class="form-control" style="height: 300px">  
                       </textarea>
                   </div>
-
-                  <div class="form-group">
-                    <label>Date of Notice</label>
-                    <input type="date" class="form-control" name="notice_date" value="{{ old('notice_date') }}" required>
-                  </div>
-                 
-                  
-                  <div class="form-group">
-                    <label>Publication Date</label>
-                    <input type="date" class="form-control" name="publish_date" value="{{ old('publish_date') }}" required>
-                  </div>
-                </div>
                 <center>
                 <div class="form-group">
                     <label style="display: block;">Recipients</label> <br>

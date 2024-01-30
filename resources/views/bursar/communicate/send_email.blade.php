@@ -99,7 +99,7 @@
 
     $('.select2').select2({
         ajax: {
-            url: '{{ url('admin/communicate/search_user') }}',
+            url: '{{ url('bursar/communicate/search_user') }}',
             dataType: 'json',
             delay: 250,
             data: function (data) {

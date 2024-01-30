@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Request;
 
 class ChatModel extends Model
 {
@@ -53,6 +54,15 @@ class ChatModel extends Model
         ELSE chat.sender_id END) AS connect_user_id'))
         ->join('users as sender', 'sender.id', '=', 'chat.sender_id')
         ->join('users as receiver', 'receiver.id', '=', 'chat.receiver_id');
+        
+        if(!empty(Request::get('search')))
+        {
+            $search = Request::get('search');
+            $getuserchat = $getuserchat->where(function($query) use($search){
+                $query->where('sender.name', 'like', '%'.$search.'%')
+                    ->orWhere('receiver.name', 'like', '%'.$search.'%');
+            });
+        }
 
         $getuserchat = $getuserchat->whereIn('chat.id', function($query) use($user_id){
             $query->selectRaw('max(chat.id)')->from('chat')
@@ -78,6 +88,7 @@ class ChatModel extends Model
             $data['message'] = $value->message; 
             $data['created_date'] = $value->created_date;
             $data['user_id'] = $value->connect_user_id; 
+            $data['is_online'] = $value->getConnectUser->OnlineUser(); 
             $data['name'] = $value->getConnectUser->name. ' '.$value->getConnectUser->last_name; 
             $data['profile_pic'] = $value->getConnectUser->getProfileDirect(); 
             $data['messagecount'] = $value->CountMessage($value->connect_user_id, $user_id);
@@ -93,6 +104,21 @@ class ChatModel extends Model
                         ->where('status', '=', 0)
                         ->count();             
         }
+        
+        static public function updateCount($sender_id, $receiver_id)
+        {
+            self::where('sender_id', '=', $receiver_id)->where('receiver_id', '=', $sender_id)
+            ->where('status', '=', 0)->update(['status' => '1']);
+        }
+
+       public function getFile()
+{
+    if (!empty($this->file) && file_exists(public_path('upload/chat/' . $this->file))) {
+        return asset('upload/chat/' . $this->file);
+    } else {
+        return "";
+    }
+}
 
     
 }

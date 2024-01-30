@@ -75,7 +75,7 @@ class BursarController extends Controller
         {
             if(!empty($user->getProfile()))
             {
-                unlink('upload/profile/'.$student->profile_pic);
+                unlink('upload/profile/'.$user->profile_pic);
             }
             $ext = $request->file('profile_pic')->getClientOriginalExtension();
             $file = $request->file('profile_pic');

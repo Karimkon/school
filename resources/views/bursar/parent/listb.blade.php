@@ -9,11 +9,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Parents Total : ( {{ $getRecord->total() }} )</h1>
-          </div>
-          <div class="col-sm-6" style="text-align: right;">
-            <a href="{{ url('admin/parent/add') }}" class="btn btn-primary">Add New Parent</a>
-          </div>
-          
+          </div>          
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -79,7 +75,7 @@
                   </div>
                   <div class="form-group col-md-3">
                     <button class="btn btn-primary" type="submit" style="margin-top: 30px">Search</button>
-                    <a href="{{ url('admin/student/list') }}" style="margin-top: 30px" class="btn btn-success">Reset</a>
+                    <a href="{{ url('bursar/student/list') }}" style="margin-top: 30px" class="btn btn-success">Reset</a>
                   </div>
                   </div>
                  
@@ -134,9 +130,7 @@
                       <td>{{ ($value->status == 0) ? 'Active': 'Inactive'}}</td>
                       <td>{{ $value->created_at }}</td>
                       <td class="row" style="min-width: 150px">
-                        <a href="{{ url('admin/parent/edit/'.$value->id) }}" class="btn btn-primary">Edit</a>
-                        <a href="{{ url('admin/parent/delete/'.$value->id) }}" class="btn btn-danger">Delete</a>
-                        <a href="{{ url('admin/parent/my-student/'.$value->id) }}" class="btn btn-primary">Parent's Attached students</a>
+                        <a href="{{ url('bursar/parent/my-student/'.$value->id) }}" class="btn btn-primary">Parent's children</a>
                         <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success">Send Message</a>
                       </td>
                     </tr>
