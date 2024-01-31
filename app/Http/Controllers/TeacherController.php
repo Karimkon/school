@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Excel;
+use App\Exports\TeachersExport;
 use Hash;
 use Auth;
 use Str;
@@ -156,6 +158,11 @@ class TeacherController extends Controller
             abort(404);
         }
         
+    }
+
+    public function TeachersExport(Request $request)
+    {
+         return Excel::download(new TeachersExport, 'Teachers'.date('d-m-Y').'.xlsx');
     }
    
 }

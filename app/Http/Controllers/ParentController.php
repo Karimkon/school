@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Excel;
+use App\Exports\ParentsExport;
 use Hash;
 use Auth;
 use Str;
@@ -191,6 +193,11 @@ class ParentController extends Controller
 
     $data['header_title'] = "My student List";
     return view('parent.my_student', $data);
+}
+
+public function ParentsExport(Request $request)
+{
+     return Excel::download(new ParentsExport, 'Parents'.date('d-m-Y').'.xlsx');
 }
 
 }

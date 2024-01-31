@@ -123,6 +123,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/student/edit/{id}', [StudentController::class, 'edit']); 
     Route::post('admin/student/edit/{id}', [StudentController::class, 'update']);
     Route::get('admin/student/delete/{id}', [StudentController::class, 'delete']);
+    Route::post('admin/student/students_excel_export', [StudentController::class, 'StudentsExport']);
 
     //Bursar urls
     Route::get('admin/bursar/list', [BursarController::class, 'list']); 
@@ -139,6 +140,8 @@ Route::group(['middleware' => 'admin'], function () {
      Route::get('admin/teacher/edit/{id}', [TeacherController::class, 'edit']); 
      Route::post('admin/teacher/edit/{id}', [TeacherController::class, 'update']);
      Route::get('admin/teacher/delete/{id}', [TeacherController::class, 'delete']);
+     Route::post('admin/teacher/teachers_excel_export', [TeacherController::class, 'TeachersExport']);
+
 
     //Parent urls
     Route::get('admin/parent/list', [ParentController::class, 'list']); 
@@ -150,6 +153,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/parent/my-student/{id}', [ParentController::class, 'myStudent']);
     Route::get('admin/parent/assign_student_parent/{student_id}/{parent_id}', [ParentController::class, 'AssignStudentParent']);
     Route::get('admin/parent/assign_student_parent_delete/{student_id}', [ParentController::class, 'AssignStudentParentDelete']);
+    Route::post('admin/parent/parents_excel_export', [ParentController::class, 'ParentsExport']);
 
     //My Admin Account Edit Urls
     Route::get('admin/account', [UserController::class, 'Myaccount']);

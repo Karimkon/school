@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ClassModel;
+use Excel;
+use App\Exports\StudentsExport;
 use Hash;
 use Auth;
 use Str;
@@ -186,4 +188,10 @@ class StudentController extends Controller
         return view('teacher.my_student', $data);
 
     }
+
+    public function StudentsExport(Request $request)
+    {
+         return Excel::download(new StudentsExport, 'Students'.date('d-m-Y').'.xlsx');
+    }
+
 }

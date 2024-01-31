@@ -4,70 +4,21 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-<a class="nav-link toggle-button" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="font-size: 28px;">&#x2261;</i></a>
+<a class="nav-link toggle-button" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="font-size: 28px;"></i></a>
       </li>
       
     </ul>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+     @php
+       $getAllChatUserCount = App\Models\ChatModel::getAllChatUserCount();
+     @endphp
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('chat') }}">
           <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
+          <span class="badge badge-danger navbar-badge">{{ !empty($getAllChatUserCount) ? $getAllChatUserCount : '' }}</span>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="{{ url('public/dist/img/user1-128x128.jpg') }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Brad Diesel
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="{{ url('public/dist/img/user8-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="public/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="{{ url('chat') }}" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
       </li>
       
             <!-- User Profile Dropdown Menu -->
@@ -96,10 +47,6 @@
 
   <a class="nav-link" data-toggle="dropdown" href="#">
     <i class="fas fa-user"></i>
-    <span class="nav-profile-dropdown-icon" style="font-size: 24px;"> <!-- Adjust the font size as needed -->
-        <!-- Example: use a down arrow character -->
-        <strong>&#x2304;</strong>    <!-- Unicode character for a down arrow -->
-    </span>
 </a>
 
     <div class="dropdown-menu dropdown-menu-right">
@@ -265,7 +212,7 @@
           <a href="#" class="nav-link @if(in_array(Request::segment(2), ['examinations'])) active @endif">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                  EXAMINATIONS MODULE
+                  EXAMINATIONS
                   <i class="fas fa-angle-left right"></i>
               </p>
           </a>
@@ -309,7 +256,7 @@
         <a href="#" class="nav-link @if(in_array(Request::segment(2), ['attendance'])) active @endif">
             <i class="nav-icon fas fa-table"></i>
             <p>
-                ATTENDANCE SYSTEM
+                ATTENDANCE
                 <i class="fas fa-angle-left right"></i>
             </p>
         </a>
@@ -342,7 +289,7 @@
         <a href="#" class="nav-link @if(in_array(Request::segment(2), ['communicate'])) active @endif">
             <i class="nav-icon fas fa-table"></i>
             <p>
-                SCHOOL COMMUNICATION 
+                COMMUNICATION 
                 <i class="fas fa-angle-left right"></i>
             </p>
         </a>
@@ -369,7 +316,7 @@
       <a href="#" class="nav-link @if(in_array(Request::segment(2), ['homework'])) active @endif">
           <i class="nav-icon fas fa-table"></i>
           <p>
-              HOME WORK MANAGEMENT 
+              ASSIGNMENTS 
               <i class="fas fa-angle-left right"></i>
           </p>
       </a>
@@ -424,7 +371,7 @@
 
 <li class="nav-item">
   <a href="{{ url('admin/setting') }}" class="nav-link @if(Request::segment(2) == 'setting') active @endif">
-    <i class="nav-icon fas fa-tachometer-alt"></i>
+    <i class="fa-sharp fa-solid fa-gear"></i>
     <p>
        Settings
     </p>
@@ -435,7 +382,7 @@
 
           <li class="nav-item">
             <a href="{{ url('admin/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
-              <i class="nav-icon far fa-user"></i>
+              <i class="fa-solid fa-lock"></i>
               <p>
                 Change Password
               </p>
@@ -454,7 +401,7 @@
 
           <li class="nav-item">
             <a href="{{ url('teacher/my_class_subject') }}" class="nav-link @if(Request::segment(2) == 'my_class_subject') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="fa-solid fa-chalkboard-user"></i>
               <p>
                 My Classes & Subjects
               </p>
@@ -463,16 +410,16 @@
 
           <li class="nav-item">
             <a href="{{ url('teacher/my_exam_timetable') }}" class="nav-link @if(Request::segment(2) == 'my_exam_timetable') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="fa-solid fa-calendar-check"></i>
               <p>
-                My Exam Timetable
+              Exam Timetable
               </p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="{{ url('teacher/my_calendar') }}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 My Calendar
               </p>
@@ -481,7 +428,7 @@
 
           <li class="nav-item">
             <a href="{{ url('teacher/marks_register') }}" class="nav-link @if(Request::segment(2) == 'marks_register') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="fa-solid fa-marker"></i>
               <p>
                 Mark Register 
               </p>
@@ -490,7 +437,7 @@
 
           <li class="nav-item">
             <a href="{{ url('teacher/my_student') }}" class="nav-link @if(Request::segment(2) == 'my_student') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="fa-solid fa-user-graduate"></i>
               <p>
                 My Students
               </p>
@@ -503,7 +450,7 @@
       <a href="#" class="nav-link @if(in_array(Request::segment(2), ['homework'])) active @endif">
           <i class="nav-icon fas fa-table"></i>
           <p>
-              HOME WORK MANAGEMENT 
+              ASSIGNMENTS 
               <i class="fas fa-angle-left right"></i>
           </p>
       </a>
@@ -533,7 +480,7 @@
         <li class="nav-item">
             <a href="{{ url('teacher/attendance/student') }}" class="nav-link @if(in_array(Request::segment(2), ['attendance', 'student'])) active @endif">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Student Attendance Schedule</p>
+                <p>Schedule Attendance </p>
             </a>
         </li>
         <li class="nav-item">
@@ -551,7 +498,7 @@
 
           <li class="nav-item">
             <a href="{{ url('teacher/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                School Notice Board
               </p>
@@ -561,7 +508,7 @@
 
           <li class="nav-item">
             <a href="{{ url('teacher/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
-              <i class="nav-icon far fa-user"></i>
+              <i class="fa-solid fa-lock"></i>
               <p>
                 Change Password
               </p>
@@ -581,7 +528,7 @@
 
           <li class="nav-item">
             <a href="{{ url('student/my_calendar') }}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 My Calendar
               </p>
@@ -599,7 +546,7 @@
 
           <li class="nav-item">
             <a href="{{ url('student/my_timetable') }}" class="nav-link @if(Request::segment(2) == 'my_timetable') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="fa-solid fa-calendar-check"></i>
               <p>
                 My Timetable
               </p>
@@ -608,7 +555,7 @@
 
           <li class="nav-item">
             <a href="{{ url('student/my_exam_timetable') }}" class="nav-link @if(Request::segment(2) == 'my_exam_timetable') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="fa-solid fa-calendar-days"></i>
               <p>
                 My Exam Timetable
               </p>
@@ -628,9 +575,9 @@
 
           <li class="nav-item">
             <a href="{{ url('student/my_homework') }}" class="nav-link @if(Request::segment(2) == 'my_homework') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="fa-solid fa-laptop-file"></i>
               <p>
-               Class Assignment 
+               Class Assignments
               </p>
             </a>
           </li>
@@ -646,7 +593,7 @@
 
           <li class="nav-item">
             <a href="{{ url('student/fees_collection') }}" class="nav-link @if(Request::segment(2) == 'fees_collection') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-wallet"></i>
               <p>
                Check Tuition Balance
               </p>
@@ -656,7 +603,7 @@
 
           <li class="nav-item">
             <a href="{{ url('student/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                School Notice Board
               </p>
@@ -666,7 +613,7 @@
 
           <li class="nav-item">
             <a href="{{ url('student/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
-              <i class="nav-icon far fa-user"></i>
+              <i class="fa-solid fa-lock"></i>
               <p>
                 Change Password
               </p>
@@ -686,7 +633,7 @@
 
           <li class="nav-item">
             <a href="{{ url('parent/my_student') }}" class="nav-link @if(Request::segment(2) == 'my_student') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 My Child / Student
               </p>
@@ -695,16 +642,16 @@
 
           <li class="nav-item">
             <a href="{{ url('parent/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
-                My Notice Board
+                Notice Board
               </p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="{{ url('parent/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 My Account
               </p>
@@ -713,7 +660,7 @@
 
           <li class="nav-item">
             <a href="{{ url('parent/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
-              <i class="nav-icon far fa-user"></i>
+              <i class="fa-solid fa-lock"></i>
               <p>
                 Change Password
               </p>
@@ -799,7 +746,7 @@
         <a href="#" class="nav-link @if(in_array(Request::segment(2), ['communicate'])) active @endif">
             <i class="nav-icon fas fa-table"></i>
             <p>
-                SCHOOL COMMUNICATION 
+                 COMMUNICATION 
                 <i class="fas fa-angle-left right"></i>
             </p>
         </a>
@@ -853,7 +800,7 @@
   <a href="#" class="nav-link @if(in_array(Request::segment(2), ['inventory'])) active @endif">
       <i class="nav-icon fas fa-table"></i>
       <p>
-          INVENTORY / PROCUREMENT 
+        FINANCE
           <i class="fas fa-angle-left right"></i>
       </p>
   </a>
@@ -867,7 +814,7 @@
 
       <li class="nav-item">
         <a href="{{ url('bursar/inventory/budget') }}" class="nav-link @if(in_array(Request::segment(2), ['budget'])) active @endif">
-            <i class="nav-icon fas fa-money"></i>
+            <i class="far fa-circle nav-icon"></i>
             <p>Budget</p>
         </a>
     </li>
@@ -877,7 +824,7 @@
         
           <li class="nav-item">
             <a href="{{ url('bursar/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
-              <i class="nav-icon far fa-user"></i>
+              <i class="fa-solid fa-lock"></i>
               <p>
                 Change Password
               </p>
@@ -888,16 +835,6 @@
 
           @endif
 
-          
-          <li class="nav-item">
-            <a href="{{ url('logout') }}" class="nav-link">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                Logout
-              </p>
-            </a>
-          </li>
-         
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

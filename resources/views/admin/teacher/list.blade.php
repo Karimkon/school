@@ -110,8 +110,24 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title"> Teachers List</h3>
-                <form style="float: right;" action="" method="">
-                  <button class="btn btn-primary">Export as Excel</button>
+                <form style="float: right;" action="{{ url('admin/teacher/teachers_excel_export') }}" method="post">
+                  {{ csrf_field() }}
+                  <input type="hidden" value="{{ Request::get('name') }}" name="name">
+                  <input type="hidden" value="{{ Request::get('last_name') }}" name="last_name">
+                  <input type="hidden" value="{{ Request::get('email') }}" name="email">
+                  <input type="hidden" value="{{ Request::get('qualification') }}" name="qualification">
+                  <input type="hidden" value="{{ Request::get('mobile_number') }}" name="mobile_number">
+                  <input type="hidden" value="{{ Request::get('marital_status') }}" name="marital_status">      
+                  <input type="hidden" value="{{ Request::get('address') }}" name="address">      
+                  <input type="hidden" value="{{ Request::get('gender') }}" name="gender">      
+                  <input type="hidden" value="{{ Request::get('date_of_birth') }}" name="date_of_birth">      
+                  <input type="hidden" value="{{ Request::get('caste') }}" name="caste">      
+                  <input type="hidden" value="{{ Request::get('religion') }}" name="religion">      
+                    <input type="hidden" value="{{ Request::get('admission_date') }}" name="admission_date">      
+                  <input type="hidden" value="{{ Request::get('created_at') }}" name="created_at">      
+                  <input type="hidden" value="{{ Request::get('status') }}" name="status">      
+    
+                  <button type="submit" class="btn btn-primary">Export as Excel</button>
                 </form>
               </div>
               <!-- /.card-header -->
@@ -124,17 +140,16 @@
                       <th>Teacher Name</th>
                       <th>Email</th>
                       <th>Gender</th>
+                      <th>Work Experience</th>
                       <th>Religion</th>
                       <th>DOB</th>
                       <th>Blood Group</th>
                       <th>Date Of Joining</th>
                       <th>Mobile Number</th>
                       <th>Marital Status</th>
-                      <th>Current Address</th>
+                      <th>Address</th>
                       <th>Permanent Address</th>
                       <th>Qualifications</th>
-                      <th>Work Experience</th>
-                      <th>Note</th>
                       <th>Status</th>
                       <th>Created Date</th>
                       <th>Action</th>
@@ -152,6 +167,7 @@
                       <td>{{ $value->name }} {{ $value->last_name }}</td>
                       <td>{{ $value->email }}</td>
                       <td>{{ $value->gender }}</td>
+                      <td>{{ $value->work_experience }}</td>
                       <td>{{ $value->religion }}</td>
                       <td>
                         @if (!empty($value->date_of_birth))
@@ -171,8 +187,6 @@
                       <td>{{ $value->address }}</td>
                       <td>{{ $value->permanent_address }}</td>
                       <td>{{ $value->qualification }}</td>
-                      <td>{{ $value->work_experience }}</td>
-                      <td>{{ $value->note }}</td>
                       <td>{{ ($value->status == 0) ? 'Active': 'Inactive'}}</td>
                       <td>{{ $value->created_at }}</td>
                       <td style="min-width: 270px;">

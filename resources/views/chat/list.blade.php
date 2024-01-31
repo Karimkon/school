@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('style')
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="{{ url('public/emojionearea/emojionearea.min.css') }}" rel="stylesheet" />
+
 <style type="text/css">
 
 .card {
@@ -219,6 +221,11 @@
     height: 0
 }
 
+.emojionearea-editor{
+    height: 72px !important;
+    min-height: 72px !important;
+}
+
 @media only screen and (max-width: 767px) {
     .chat-list
 {
@@ -321,7 +328,10 @@
 </div>
 @endsection
 @section('script')
+<script src="{{ url('public/emojionearea/emojionearea.min.js') }}"></script>
+
 <script type="text/javascript">
+    $('.emojionearea').emojioneArea({});
     $('body').delegate('.getChatWindows', 'click', function (e) {
         e.preventDefault();
         var receiver_id = $(this).attr('id');
@@ -341,6 +351,7 @@
                 $('#getChatMessageAll').html(data.success);
                 window.history.pushState("", "", "{{ url('chat?receiver_id=') }}" + data.receiver_id);
                 scrolldown();
+                $('.emojionearea').emojioneArea({});
             },
             error: function (data) {
                 // Handle error
@@ -373,30 +384,35 @@
         });
     });
 
-     $('body').delegate('#submit_message', 'submit', function (e) {
-        e.preventDefault();
-        var receiver_id = $('#getReceiverIDDynamic').val();
-        var formData = new FormData(this);
+    $('body').delegate('#submit_message', 'submit', function (e) {
+    e.preventDefault();
+    var receiver_id = $('#getReceiverIDDynamic').val();
+    var formData = new FormData(this);
 
-        $.ajax({
-            type: 'POST',
-            url: "{{ url('submit_message') }}",
-            data: formData,
-            processData: false,
-            contentType: false,
-            dataType: 'json',
-            success: function (data) {
-                $('#AppendMessage').append(data.success);
-                $('#ClearMessage').val('');
-                $('#file_name').val('');
-                $('#getFileName').html('');
-                scrolldown();
-            },
-            error: function (data) {
-                // Handle error
-            },
-        });
+    $.ajax({
+        type: 'POST',
+        url: "{{ url('submit_message') }}",
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: function (data) {
+            $('#AppendMessage').append(data.success);
+            $('#ClearMessage').val(''); // Clear only the message textarea
+            $('#file_name').val('');
+            $('#getFileName').html('');
+            $('.emojionearea').data('emojioneArea').setText(''); // Reset emojionearea
+            scrolldown();
+        },
+        error: function (data) {
+            // Handle error
+        },
     });
+});
+
+
+
+
 
     $('body').delegate('#OpenFile', 'click', function (e) {
         $('#file_name').trigger('click');

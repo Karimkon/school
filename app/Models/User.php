@@ -109,7 +109,7 @@ class User extends Authenticatable
         return $return;
 
     }
-    static function getParent()
+    static function getParent($remove_pagination = 0)
     {
         $return = self::select('users.*')
                             ->where('user_type','=',5)
@@ -153,13 +153,20 @@ class User extends Authenticatable
                                 $status = (Request::get('status') == 100) ? 0 : 1;
                                 $return = $return->whereDate('users.status', '=', $status);
                             }
-        $return = $return ->orderBy('id', 'desc')
-        ->paginate(25);
+        $return = $return ->orderBy('id', 'desc');
+                   
+        if(!empty($remove_pagination))
+        {
+            $return=$return->get();
+        }
+        else
+        {
+            $return=$return->paginate(50);
+        }
         return $return;
-
     }
 
-    static function getStudent()
+    static function getStudent($remove_pagination = 0)
     {
         $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
                             ->join('class', 'class.id', '=', 'users.class_id', 'left')
@@ -223,9 +230,17 @@ class User extends Authenticatable
                                 $status = (Request::get('status') == 100) ? 0 : 1;
                                 $return = $return->whereDate('users.status', '=', $status);
                             }
-        $return = $return ->orderBy('users.id', 'desc')
-        ->paginate(25);
-        return $return;
+        $return = $return ->orderBy('users.id', 'desc');
+
+                 if(!empty($remove_pagination))
+                  {
+                      $return=$return->get();
+                  }
+                  else
+                  {
+                      $return=$return->paginate(50);
+                  }
+                  return $return;
 
     }
 
@@ -397,7 +412,7 @@ static public function getMyStudentCount($parent_id){
     ->count();
 }
 
-    static public function getTeacher()
+    static public function getTeacher($remove_pagination = 0)
     {
         $return = self::select('users.*')
                ->where('users.user_type', '=', 3)
@@ -448,10 +463,18 @@ static public function getMyStudentCount($parent_id){
                                 $return = $return->whereDate('users.status', '=', $status);
                             }
 
-        $return = $return->orderBy('users.id', 'desc')
-               ->paginate(20);
-
+        $return = $return->orderBy('users.id', 'desc');
+               
+        if(!empty($remove_pagination))
+        {
+            $return=$return->get();
+        }
+        else
+        {
+            $return=$return->paginate(50);
+        }
         return $return;
+
     }
 
     static public function getTeacherClass()

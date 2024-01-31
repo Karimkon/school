@@ -9,7 +9,7 @@
         {{ csrf_field() }}
         <input type="hidden" name="receiver_id" value="{{ $getReceiver->id }}">
         
-        <textarea name="message" id="ClearMessage" class="form-control" required></textarea>
+        <textarea name="message" id="ClearMessage" class="form-control emojionearea" required ></textarea>
         <div class="row">
             <div class="col-md-6 hidden-sm">
                 <a href="javascript:void(0);" id="OpenFile" style="margin-top: 10px;" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>

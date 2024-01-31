@@ -118,9 +118,26 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">All Student List</h3>
-                
-                <form action="" method="post" style="float: right;">
-                  <button class="btn btn-primary">Export Excel</button>
+
+                <form style="float: right;" action="{{ url('admin/student/students_excel_export') }}" method="post">
+                  {{ csrf_field() }}
+                  <input type="hidden" value="{{ Request::get('student_id') }}" name="student_id">
+                  <input type="hidden" value="{{ Request::get('name') }}" name="name">
+                  <input type="hidden" value="{{ Request::get('last_name') }}" name="last_name">
+                  <input type="hidden" value="{{ Request::get('email') }}" name="email">
+                  <input type="hidden" value="{{ Request::get('admission_number') }}" name="admission_number">
+                  <input type="hidden" value="{{ Request::get('roll_number') }}" name="roll_number">      
+                  <input type="hidden" value="{{ Request::get('class') }}" name="class">      
+                  <input type="hidden" value="{{ Request::get('gender') }}" name="gender">      
+                  <input type="hidden" value="{{ Request::get('date_of_birth') }}" name="date_of_birth">      
+                  <input type="hidden" value="{{ Request::get('caste') }}" name="caste">      
+                  <input type="hidden" value="{{ Request::get('religion') }}" name="religion">      
+                  <input type="hidden" value="{{ Request::get('mobile_number') }}" name="mobile_number">      
+                  <input type="hidden" value="{{ Request::get('admission_date') }}" name="admission_date">      
+                  <input type="hidden" value="{{ Request::get('created_at') }}" name="created_at">      
+                  <input type="hidden" value="{{ Request::get('status') }}" name="status">      
+
+                  <button type="submit" class="btn btn-primary">Export as Excel</button>
                 </form>
               </div>
               

@@ -96,10 +96,30 @@
           </div>
           <!-- /.col -->
           <div class="col-md-12">
+            
             <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">All Parents List</h3>
+
+                <form style="float: right;" action="{{ url('admin/parent/parents_excel_export') }}" method="post">
+                  {{ csrf_field() }}
+                  <input type="hidden" value="{{ Request::get('name') }}" name="name">
+                  <input type="hidden" value="{{ Request::get('last_name') }}" name="last_name">
+                  <input type="hidden" value="{{ Request::get('email') }}" name="email">
+                  <input type="hidden" value="{{ Request::get('address') }}" name="address">      
+                  <input type="hidden" value="{{ Request::get('gender') }}" name="gender">      
+                  <input type="hidden" value="{{ Request::get('date_of_birth') }}" name="date_of_birth">      
+                  <input type="hidden" value="{{ Request::get('mobile_number') }}" name="mobile_number">      
+                  <input type="hidden" value="{{ Request::get('occupation') }}" name="occupation">      
+                  <input type="hidden" value="{{ Request::get('created_at') }}" name="created_at">      
+                  <input type="hidden" value="{{ Request::get('status') }}" name="status">      
+
+                  <button type="submit" class="btn btn-primary">Export as Excel</button>
+                </form>
+              </div>
               
               <!-- /.card-header -->
-              <div class="card-body p-0">
+              <div class="card-body p-0" style="overflow: auto;">
                 <table class="table">
                   <thead>
                     <tr>
