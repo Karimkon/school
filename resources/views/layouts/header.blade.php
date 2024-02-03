@@ -69,9 +69,9 @@
     <!-- Brand Logo -->
     <a href="javascript:;" class="brand-link" style="text-align: center">
       @if(!empty($getHeaderSetting->getLogo()))
-      <img src="{{ $getHeaderSetting->getLogo() }}" alt="MISS" style="width:auto;height:30px;border-radius:5px;"><center>ACADEMIA</center>
+      <img src="{{ $getHeaderSetting->getLogo() }}" alt="MISS" style="width:auto;height:30px;border-radius:5px;"><center>MADINA ISLAMIC S.S</center>
       @else
-      <span class="brand-text font-weight-light" style="font-weight: bold !important;font-size: 20px">ACADEMIA</span>
+      <span class="brand-text font-weight-light" style="font-weight: bold !important;font-size: 20px">ISLAMIC SECONDARY SCHOOL</span>
       @endif
     </a>
 
@@ -147,6 +147,14 @@
                   </a>
                 </li>
       
+                <li class="nav-item">
+                  <a href="{{ url('admin/librarian/list') }}" class="nav-link @if(Request::segment(2) == 'librarian') active @endif">
+                      <i class="nav-icon far fa-user"></i>
+                      <p>
+                        Librarians
+                      </p>
+                  </a>
+              </li>
       
             </ul>
         </li>
@@ -830,6 +838,131 @@
               </p>
             </a>
           </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          @elseif(Auth::user()->user_type == 6)
+
+          <li class="nav-item">
+            <a href="{{ url('librarian/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                    Dashboard 
+                </p>
+            </a>
+        </li>
+ 
+        <li class="nav-item @if(in_array(Request::segment(2), ['books', 'authors', 'borrowed', 'admin'])) menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link @if(in_array(Request::segment(2), ['class'])) active @endif">
+                <i class="nav-icon fas fa-table"></i>
+                <p>
+                    BOOK MANAGEMENT
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                      
+            <li class="nav-item">
+              <a href="{{ url('librarian/books/list') }}" class="nav-link @if(Request::segment(2) == 'books') active @endif">
+                  <i class="nav-icon far fa-user"></i>
+                  <p>
+                      Add Books
+                  </p>
+              </a>
+          </li>
+
+              <li class="nav-item">
+                <a href="{{ url('librarian/authors/list') }}" class="nav-link @if(Request::segment(2) == 'authors') active @endif">
+                    <i class="nav-icon far fa-user"></i>
+                    <p>
+                      Authors
+                    </p>
+                </a>
+            </li>
+              
+              <li class="nav-item">
+                  <a href="{{ url('admin/borrowed/list') }}" class="nav-link @if(Request::segment(2) == 'borrowed') active @endif">
+                      <i class="nav-icon far fa-user"></i>
+                      <p>
+                          Borrowed Books
+                      </p>
+                  </a>
+              </li>
+              
+                <li class="nav-item">
+                  <a href="{{ url('admin/parent/list') }}" class="nav-link @if(Request::segment(2) == 'parent') active @endif">
+                    <i class="nav-icon far fa-user"></i>
+                    <p>
+                      Available Books 
+                    </p>
+                  </a>
+                </li>
+      
+            </ul>
+        </li>
+
+
+
+
+
+          <li class="nav-item @if(in_array(Request::segment(2), ['class', 'teacher', 'subject', 'assign_subject', 'assign_class_teacher', 'class_timetable'])) menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link @if(in_array(Request::segment(2), ['class'])) active @endif">
+                <i class="nav-icon fas fa-table"></i>
+                <p>
+                    ACADEMICS
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ url('admin/class/list') }}" class="nav-link @if(in_array(Request::segment(2), ['class', 'teacher'])) active @endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Classes Management</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('admin/teacher/list') }}" class="nav-link @if(in_array(Request::segment(2), ['teacher'])) active @endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Teachers Management</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('admin/subject/list') }}" class="nav-link @if(in_array(Request::segment(2), ['subject'])) active @endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Subjects</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('admin/assign_subject/list') }}" class="nav-link @if(in_array(Request::segment(2), ['assign_subject'])) active @endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Subject Assign</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('admin/assign_class_teacher/list') }}" class="nav-link @if(in_array(Request::segment(2), ['assign_class_teacher'])) active @endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Assign Classes to Teachers</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('admin/class_timetable/list') }}" class="nav-link @if(in_array(Request::segment(2), ['class_timetable'])) active @endif">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Class TimeTable</p>
+                  </a>
+              </li>
+            </ul>
+        </li>
+
 
 
 

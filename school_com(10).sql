@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2024 at 12:08 PM
+-- Generation Time: Feb 03, 2024 at 02:43 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -52,6 +52,87 @@ INSERT INTO `assign_class_teacher` (`id`, `class_id`, `teacher_id`, `status`, `i
 (16, 5, 20, 0, 0, '1', '2023-10-26 18:06:24', '2023-10-26 18:06:24'),
 (17, 8, 2, 0, 0, '1', '2023-10-26 18:14:07', '2023-10-26 18:14:07'),
 (18, 6, 20, 0, 0, '1', '2023-10-27 18:09:36', '2023-10-27 18:09:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `authors`
+--
+
+CREATE TABLE `authors` (
+  `id` int(11) NOT NULL,
+  `author_pic` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `date_of_death` date DEFAULT NULL,
+  `nationality` varchar(255) NOT NULL,
+  `biography` text DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `is_delete` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `authors`
+--
+
+INSERT INTO `authors` (`id`, `author_pic`, `first_name`, `last_name`, `date_of_birth`, `date_of_death`, `nationality`, `biography`, `created_by`, `is_delete`, `created_at`, `updated_at`) VALUES
+(1, '20240202034359l1khhrgb8lqa6ilt9ttc.png', 'Kemis', 'Muhammad', '2024-02-01', '2024-02-15', 'Sudaneese', 'He was born in Juba', 24, 0, '2024-02-02 15:43:59', '2024-02-02'),
+(2, '20240202040022rqunrayhuemokvx7tsih.png', 'Katongole', 'James', '1990-02-01', '1985-02-14', 'Ugandan', 'He was in Ugandan', 24, 0, '2024-02-02 16:00:22', '2024-02-02');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `books`
+--
+
+CREATE TABLE `books` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `book_pic` varchar(255) DEFAULT NULL,
+  `author_id` int(11) DEFAULT NULL,
+  `isbn` varchar(255) DEFAULT NULL COMMENT 'The International Standard Book Number, a unique identifier for books.',
+  `publisher` varchar(255) DEFAULT NULL,
+  `publish_date` date DEFAULT NULL,
+  `genre` varchar(255) DEFAULT NULL COMMENT 'he genre or category of the book (e.g., fiction, non-fiction, mystery).',
+  `description` text DEFAULT NULL,
+  `language` varchar(255) DEFAULT NULL,
+  `total_pages` varchar(255) DEFAULT NULL,
+  `quantity_in_stock` varchar(255) DEFAULT NULL,
+  `price` varchar(255) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `is_delete` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `books`
+--
+
+INSERT INTO `books` (`id`, `title`, `book_pic`, `author_id`, `isbn`, `publisher`, `publish_date`, `genre`, `description`, `language`, `total_pages`, `quantity_in_stock`, `price`, `created_by`, `is_delete`, `created_at`, `updated_at`) VALUES
+(1, 'Adventures of Tom Sawyer', '202402020251297mggez22p4ng4abjjdtr.png', 2, '1', 'Fahad', '2024-02-02', 'Fiction', 'Its very funny', 'English', '10000', '45', '69000', 24, 0, '2024-02-02 14:51:29', '2024-02-02 14:51:29'),
+(2, 'Translation Of the Holly Quran', '20240202042005mozu8swgt3rr6h4tsb6a.png', 1, '123', 'Hamad', '2024-02-02', 'Fiction', 'Awesome', 'English', '300', '78', '7000', 24, 0, '2024-02-02 16:20:05', '2024-02-02 16:20:05'),
+(3, 'Tafsir', '20240202043058zxkczrueatmhw9rz22nf.png', 2, '32', 'Fahad', '2024-02-02', 'Religion', 'Religious boook', 'English', '4000', '122', '60000', 24, 0, '2024-02-02 16:30:58', '2024-02-02 16:30:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `borrowings`
+--
+
+CREATE TABLE `borrowings` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `book_id` int(11) DEFAULT NULL,
+  `borrow_date` date DEFAULT NULL,
+  `return_date` date DEFAULT NULL,
+  `returned` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -107,7 +188,10 @@ INSERT INTO `chat` (`id`, `sender_id`, `receiver_id`, `message`, `file`, `status
 (48, 1, 18, 'hi', NULL, 0, 1706690768, '2024-01-31 08:46:08', '2024-01-31 08:46:08'),
 (49, 1, 18, 'hi', NULL, 0, 1706690771, '2024-01-31 08:46:11', '2024-01-31 08:46:11'),
 (50, 1, 18, '😇', NULL, 0, 1706690885, '2024-01-31 08:48:05', '2024-01-31 08:48:05'),
-(51, 1, 23, 'hi', NULL, 0, 1706699266, '2024-01-31 11:07:46', '2024-01-31 11:07:46');
+(51, 1, 23, 'hi', NULL, 1, 1706699266, '2024-01-31 11:07:46', '2024-01-31 12:40:06'),
+(52, 23, 1, 'hi i am in books', NULL, 0, 1706704817, '2024-01-31 12:40:17', '2024-01-31 12:40:17'),
+(53, 2, 1, 'yes please', NULL, 1, 1706707244, '2024-01-31 13:20:44', '2024-01-31 13:31:58'),
+(54, 1, 2, 'Alright', NULL, 0, 1706707932, '2024-01-31 13:32:12', '2024-01-31 13:32:12');
 
 -- --------------------------------------------------------
 
@@ -496,7 +580,7 @@ INSERT INTO `inventory` (`id`, `name`, `description`, `quantity`, `total_amount_
 (1, 'wrrrr', 'tertrte', '2', 0, NULL, 0, '20240121103356hbjhl4acymhde12b63ca.png', 23, NULL, '2000444', '2024-01-21 10:33:56', '2024-01-25 08:45:58'),
 (2, 'Laundry stuff', 'Soap and detergents', '3', 0, NULL, 0, '20240121111703bhqugfvugbvxht8eecki.png', 23, NULL, '2000', '2024-01-21 11:17:03', '2024-01-25 08:24:15'),
 (3, 'Router', 'Internet', '1', 0, NULL, 0, '20240121112239lf9h9oap5dvaae8fh6ar.jpg', 23, NULL, '2000', '2024-01-21 11:22:39', '2024-01-21 11:22:39'),
-(4, 's', 's', '20', 0, NULL, 0, '20240122095722v1cxlpdi3hnb8jhsnz7j.png', 23, NULL, '200000', '2024-01-22 21:57:22', '2024-01-22 21:57:22'),
+(4, 's', 's', '20', 0, NULL, 1, '20240122095722v1cxlpdi3hnb8jhsnz7j.png', 23, NULL, '200000', '2024-01-22 21:57:22', '2024-01-31 12:31:41'),
 (5, 'soap', 'wfggdfg', '33', 0, NULL, 0, '20240122112724nghoyiskx6yud9xpkyzv.jpg', 23, NULL, '23000', '2024-01-22 23:27:24', '2024-01-22 23:29:33'),
 (6, 'Computers', 'Computer Lab PCS', '45', 0, NULL, 0, '20240123122347dx9zloinfohwcvsiy6g7.jpg', 23, NULL, '800000', '2023-11-01 00:23:47', '2023-11-01 00:23:47'),
 (7, 'test', 'pcs', '3', 0, NULL, 1, '20240125083956fcwmhckbnnzns5a4c25f.jpg', 23, NULL, '2000', '2024-01-25 08:39:56', '2024-01-25 08:45:29'),
@@ -721,6 +805,7 @@ CREATE TABLE `setting` (
   `logo` varchar(255) DEFAULT NULL,
   `fevicon_icon` varchar(255) DEFAULT NULL,
   `school_name` varchar(100) DEFAULT NULL,
+  `login_image` varchar(255) DEFAULT NULL,
   `exam_description` text DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
@@ -730,8 +815,8 @@ CREATE TABLE `setting` (
 -- Dumping data for table `setting`
 --
 
-INSERT INTO `setting` (`id`, `paypal_email`, `stripe_key`, `stripe_secret`, `stripe_session_id`, `logo`, `fevicon_icon`, `school_name`, `exam_description`, `created_at`, `updated_at`) VALUES
-(1, 'hhego94@gmail.com', 'pk_test_51MJycAFSBzPbzGC1bD845yNrYew0se8Nyy9Wioe0pwxYxhkMtcU4ZlwHaxIWnfMQpNKPPUzle1rZW0AhkPbBUG3600lkSsoXms', 'sk_test_51MJycAFSBzPbzGC1C9FkKOitiaEyqeCbdGyj07jKrOQmHndAFzIXIYoKbue8Y6BUU5MSWuGddVGfmGvu6TstIbkT00uWNhzt8f', NULL, '20231024020033bnwv2qcrkk.png', '20231024020033gyyvhsi8mm.png', 'The Ultimate Academia System', 'This report aims to deliver an assessment of the student\'s performance for the current academic term.', NULL, '2023-10-28 15:28:53');
+INSERT INTO `setting` (`id`, `paypal_email`, `stripe_key`, `stripe_secret`, `stripe_session_id`, `logo`, `fevicon_icon`, `school_name`, `login_image`, `exam_description`, `created_at`, `updated_at`) VALUES
+(1, 'hhego94@gmail.com', 'pk_test_51MJycAFSBzPbzGC1bD845yNrYew0se8Nyy9Wioe0pwxYxhkMtcU4ZlwHaxIWnfMQpNKPPUzle1rZW0AhkPbBUG3600lkSsoXms', 'sk_test_51MJycAFSBzPbzGC1C9FkKOitiaEyqeCbdGyj07jKrOQmHndAFzIXIYoKbue8Y6BUU5MSWuGddVGfmGvu6TstIbkT00uWNhzt8f', NULL, '20240201071408lsitqulvcg.jpg', '20240201072411fymupalxhh.jpg', 'The Ultimate Academia System', '20240201074239ccuqmpa2mi.jpg', 'This report aims to deliver an assessment of the student\'s performance for the current academic term.', NULL, '2024-02-01 07:42:39');
 
 -- --------------------------------------------------------
 
@@ -891,7 +976,7 @@ CREATE TABLE `users` (
   `occupation` varchar(50) DEFAULT NULL,
   `address` varchar(50) DEFAULT NULL,
   `permanent_address` varchar(100) DEFAULT NULL,
-  `user_type` tinyint(4) NOT NULL DEFAULT 0 COMMENT '1:Admin, 2:student, 3:Teacher, 4: bursar 5:Parent',
+  `user_type` tinyint(4) NOT NULL DEFAULT 0 COMMENT '1:Admin, 2:student, 3:Teacher, 4: bursar 5:Parent 6:Librarian',
   `is_delete` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0:not deleted, 1:deleted',
   `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0:Active, 1:Inactive',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -905,29 +990,34 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `parent_id`, `name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `admission_number`, `roll_number`, `class_id`, `gender`, `date_of_birth`, `caste`, `religion`, `marital_status`, `mobile_number`, `qualification`, `admission_date`, `profile_pic`, `blood_group`, `height`, `weight`, `occupation`, `address`, `permanent_address`, `user_type`, `is_delete`, `status`, `created_at`, `updated_at`, `work_experience`, `note`) VALUES
-(1, NULL, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$pev3huoNJ24W.wO0QHpCeOB4NAXg1PVzedo4bxboNVtmcM2jb/6Zu', 'GQVLKoWqfbrIOWDFWm53IvuKH5ZHrRR3uESXRWwFQGHmL98quOlzHouIBR5b', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '20231024114233mwmdlaxmvmy6lcmjhdkl.png', NULL, NULL, '', NULL, NULL, NULL, 1, 0, 0, NULL, '2024-01-31 08:07:49', NULL, NULL),
-(2, NULL, 'Teacher', '', 'teacher@gmail.com', NULL, '$2y$10$pev3huoNJ24W.wO0QHpCeOB4NAXg1PVzedo4bxboNVtmcM2jb/6Zu', NULL, '', NULL, NULL, '', NULL, NULL, '', '', '12345678', '', '2023-10-27', NULL, NULL, NULL, '', NULL, '', '', 3, 0, 0, NULL, '2024-01-31 04:59:30', '', ''),
-(3, 11, 'Student', 'Abdulkarim fahad', 'student@gmail.com', NULL, '$2y$10$pev3huoNJ24W.wO0QHpCeOB4NAXg1PVzedo4bxboNVtmcM2jb/6Zu', 'ogIKNN7aj6wrnmde2Ir32r7qEBYCdaJviInhfx1EyewakqYcb8JekIyAcpUo', '5', '900', 10, 'Male', '2023-10-03', 'Nubian', 'Muslim', NULL, '0707208954', NULL, NULL, '20231011093617spb3a3rzh2zxd1patcjc.png', 'B', '5 cm', '20kg', NULL, NULL, NULL, 2, 0, 0, NULL, '2024-01-21 17:10:06', NULL, NULL),
-(4, 8, 'Parent', 'gss', 'parent@gmail.com', NULL, '$2y$10$pev3huoNJ24W.wO0QHpCeOB4NAXg1PVzedo4bxboNVtmcM2jb/6Zu', NULL, '', NULL, NULL, 'Other', NULL, NULL, '', NULL, '3434343434', NULL, NULL, '202310111103543zyz76ywkovprre3fowz.png', '', '', '', 'musezi', 'kampala', NULL, 5, 0, 0, NULL, '2023-10-11 08:04:21', NULL, NULL),
-(5, NULL, 'fahad', NULL, 'hhego94@gmail.com', NULL, '$2y$10$J6I3SlZ9JizzGqaULwQj3OSVUWryRQs.FHQoG.gV3uXIyRyYWZ7XG', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 1, 0, 0, '2023-10-09 11:16:38', '2023-10-09 11:20:20', NULL, NULL),
-(6, 4, 'jamila', 'jam', 'hhego9904@gmail.com', NULL, '$2y$10$lP8sV650WiBRjmaE37DDL.PPXZ8uKrwp6ZVhehKls7.wiOtt09mcC', NULL, '7', '1', 4, 'Female', '2023-10-01', '90', 'sam', NULL, '0707208954', NULL, NULL, '20231009031431ktzo2vkqpwogxjjsaugupng', 'A', '5 cm', '20kg', NULL, NULL, NULL, 2, 0, 1, '2023-10-09 12:14:31', '2023-10-10 16:32:24', NULL, NULL),
-(7, 11, 'mukisa', 'farook', 'hhego9974@gmail.com', NULL, '$2y$10$5hxKZo.CzsD7jgWHrpthgOIH5KHgr6m1fhou.iyNOjrGT.DrlF7C6', NULL, '3', '3', 1, 'Male', '2023-10-04', 'sam', 'islam', NULL, '0707208954', NULL, NULL, '20231009033724ismgkclstjdodaeicqfqpng', 'B', '3233', '20kg', NULL, NULL, NULL, 2, 0, 0, '2023-10-09 12:37:24', '2024-01-30 11:10:17', NULL, NULL),
-(8, 4, 'Higeni', 'Abdulkarim', 'sd@gmail.com', NULL, '$2y$10$9VgvQkBq.Ek2nR/9Us7Ly.73s3ZenJUY0me3OCJ9VPsnstS.YT0qq', NULL, '5', '7', 1, 'Male', '2023-10-05', 'sd', 'sam', NULL, '0707208954', NULL, NULL, '20231009062421tntvajxh3zq9vzujuryx.png', 'B', '3233', 'ds', NULL, NULL, NULL, 2, 0, 0, '2023-10-09 13:31:54', '2023-10-15 09:09:39', NULL, NULL),
-(9, 8, 'Hijaz', 'Finance', 'it@hijazfinance.com', NULL, '$2y$10$jZsgxUReOCoX5xY0mlXizuyPgsdhDvLvUMQzR/sHpVWoKgfUOZXSm', NULL, '23', '33', 5, 'Male', '2023-10-01', '12', 'islam', NULL, '00707208954', NULL, NULL, '20231009060303avtenseapm0ozta17cwopng', 'O', '5 cm', 'ds', NULL, NULL, NULL, 2, 1, 0, '2023-10-09 15:03:03', '2023-10-09 16:20:20', NULL, NULL),
-(10, NULL, 'Higeni', 'Abdulkarim', 'hhego194@gmail.com', NULL, '$2y$10$qDGXC/xS4POr/jPgviA6HeLttgpTQoStuNcZY0K4sfH1VeDv4FI8G', NULL, NULL, NULL, NULL, 'Male', NULL, NULL, NULL, NULL, '0707208954', NULL, NULL, '20231010021349uorqwk5very0uhkkw9ui.png', NULL, NULL, NULL, 'stealer', 'kibuli', NULL, 5, 1, 0, '2023-10-10 11:13:49', '2023-10-10 12:00:28', NULL, NULL),
-(11, NULL, 'Muzadde', 'Wabaana', 'kasasa@gmail.com', NULL, '$2y$10$FEWuisN11GXXQ.M2rt8uf.mqgN4Yx8E1Rb0PvcNZX9PdjmeUdb5.m', NULL, NULL, NULL, NULL, 'Male', NULL, NULL, NULL, NULL, '07000555055', NULL, NULL, '20231010074624mupropufqjky6eluxazu.png', NULL, NULL, NULL, 'musezi', 'kampala', NULL, 5, 0, 0, '2023-10-10 16:46:24', '2023-10-10 16:46:24', NULL, NULL),
-(12, NULL, 'Higeni', 'Abdulkarim', 'hhego9433@gmail.com', NULL, '$2y$10$lpzs34u6jLCNHGWFVjmuZ.1J0DOiD57RHYREbxekoXxbAb4zIE2iS', NULL, NULL, NULL, NULL, 'Female', '2023-10-01', NULL, 'sam', '', '0707208954', 'masters', '2023-10-07', '20231010094402h6gx5gr8uiohakbonswd.png', NULL, NULL, NULL, NULL, 'kibuli', 'kampala', 3, 1, 0, '2023-10-10 18:44:02', '2023-10-11 02:01:41', '10 years', 'yes'),
-(13, NULL, 'Maganjo', 'male', 'hhego99412@gmail.com', NULL, '$2y$10$TyLnKnFgZsDMZ.QfpdnI0.BlyCUvqpc7uNUPdTrbfOalRB1bzcykm', NULL, NULL, NULL, NULL, 'Male', '2023-10-01', NULL, 'islama', '', '0707208954', 'Diploma in Education', '2023-10-01', '20231011075437ck8nuc33yfyyvbkjfmu9.png', 'B', NULL, NULL, NULL, 'kibuli', 'kampala', 3, 0, 0, '2023-10-11 02:15:38', '2024-01-31 06:28:04', '10 years', 'yes'),
-(14, NULL, 'Mr. Kalule', 'Sadam', 'sadam@gmail.com', NULL, '$2y$10$MfN.YJafzbEmjXWnE.ouEOfz.I5Cm7QCVptLXuMBviGVcELx25ggG', NULL, NULL, NULL, NULL, 'Male', '2023-10-12', NULL, 'islam', 'married', '070993390', 'masters', '2023-10-12', '20231012064419furh2mfqhocddhyoijk2.png', NULL, NULL, NULL, NULL, 'kibuli', 'kamwokya', 3, 0, 0, '2023-10-12 03:44:19', '2023-10-12 03:44:19', '10 years', 'Serious'),
-(15, 11, 'Mayanja', 'sam', 'sam@gmail.com', NULL, '$2y$10$AYgGmyB3Aig8e4F67kfW1e1Nq/o4KgrG/ZkI3eW7DWURbE32l64Xm', NULL, '12', '12', 1, 'Male', '2023-10-01', 'muganda', 'muslim', NULL, '075598821', NULL, '2023-10-01', '202310120836490l0ysaeljvlx3tvkifwh.png', 'A', '5 cm', '20kg', NULL, NULL, NULL, 2, 0, 0, '2023-10-12 05:36:49', '2023-10-15 09:09:20', NULL, NULL),
-(16, NULL, 'Adam', 'Sulaiman', 'adam@gmail.com', NULL, '$2y$10$aK/G6pbMKM.Qhle0U2qjpeWWWRfkd5lPZlSztNp655FfB8iwCf5GW', NULL, '21', '12', 3, 'Male', '2023-09-24', 'Muganda', 'Muslim', NULL, '0789912003', NULL, '2023-10-19', '20231019084300uffalnz6cbjvushbe9nl.png', 'B', '56cm', '200kg', NULL, NULL, NULL, 2, 0, 0, '2023-10-19 15:13:13', '2023-10-19 17:43:00', NULL, NULL),
-(17, 19, 'Makubuya', 'Adam', 'makubuya@gmail.com', NULL, '$2y$10$YhWjRFSuU31ub8iTDsTgZuZ0zn42dO1bk1KSSabStLH/Skv3/lbP.', NULL, '21', '34', 5, 'Male', '2023-10-08', 'Mugisu', 'Muslim', NULL, '078982213', NULL, '2023-10-24', '20231024110443s9zebveqeapu9wgp8db6.jpeg', 'A', '500 cm', '400 Kgs', NULL, NULL, NULL, 2, 0, 0, '2023-10-24 08:04:43', '2024-01-21 16:08:55', NULL, NULL),
-(18, NULL, 'TEST', NULL, 'katulabye@gmail.com', NULL, '$2y$10$a56to.FCQd3ccJxlK38/auBpKC0TBGldK9NTxG/C/p1JFrANTdP42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2023-10-26 12:15:58', '2023-10-26 12:15:58', NULL, NULL),
-(19, NULL, 'Jackob', 'jhvjh', 'jhh@gmail.com', NULL, '$2y$10$szcj2IPZIEulveSQLN/wCemkwyQRPfLWhLI1XRORaDLttjQ.uEn1C', 'tgQ1Urb4hegJ8iGz6gz6Hy4vXLw4G3jrPrirhVPFRPhg4PzpRgPRjvuCNl93', NULL, NULL, NULL, 'Female', NULL, NULL, NULL, NULL, '877677676', NULL, NULL, '20231026054320cqv8q14afhcxavlhs7ch.png', NULL, NULL, NULL, 'kkjk', 'd', NULL, 5, 0, 0, '2023-10-26 14:43:20', '2023-10-27 21:38:03', NULL, NULL),
-(20, NULL, 'BRYAN', 'CASH', 'arafa@gmail.com', NULL, '$2y$10$Zu1cgGMkWNqAMgTTX/VbfemIB5hTAs0Nsxcq92fxgLp7TODdAeiz6', NULL, NULL, NULL, NULL, 'Male', '1000-12-31', NULL, 'dsfasd', 'Single and Contented', '32877877', 'Degree', '2023-10-26', NULL, 'A', NULL, NULL, NULL, 'fadf', '323233', 3, 0, 0, '2023-10-26 14:56:20', '2024-01-31 06:27:23', 'adsaf', '\"As an experienced and dedicated educator, I am committed to fostering a positive and inclusive learning environment. My teaching philosophy revolves around creating engaging lessons that cater to diverse learning styles and abilities. I believe in the po'),
-(21, NULL, 'Test', 'Student', 'test@gmail.com', NULL, '$2y$10$rpcArXZxEH8FFzi5YlPll.EEGSTKy6Ueyk.OM5m1ze4r6buATsydi', NULL, '121', '121', 3, 'Male', '1788-02-14', 'df', 'srdsdf', NULL, '45455544', NULL, '2023-10-27', '20231027123113yrgfdsb05f77xjih9dlt.png', 'B', 'f', 'sdf', NULL, NULL, NULL, 2, 0, 0, '2023-10-27 09:31:14', '2023-10-27 09:31:56', NULL, NULL),
-(22, 19, 'Bakulumpagi', 'Abdunoor', 'abdunoor@gmail.com', NULL, '$2y$10$CCWw7fPdBVQFdWPii1gzveM.olmT55Fg805AuvFLx.KFjcXRckW9O', NULL, '131', '131', 8, 'Male', '2023-10-01', 'Munyoli', 'Muslim', NULL, '07892145', NULL, '2023-10-28', '20231028124226z1zo7fuzhod6rlogobzc.png', 'A', '67 cm', '909 kg', NULL, NULL, NULL, 2, 0, 0, '2023-10-27 19:38:27', '2023-10-27 21:42:26', NULL, NULL),
-(23, NULL, 'Bursar Fardah', NULL, 'farda@gmail.com', NULL, '$2y$10$wGuD5LWbs52/Uz8yoOwzhuVfIqN503zttqo4ZJdR34ObXQvtZHvmW', 'mhltkYDran7iLcYiamiGxF02uLRkQpmX6O6a15Wgp0PoaS4lOxOXwjZY25N0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '20231225050622nszwxbcarse2puaidxmx.png', NULL, NULL, NULL, NULL, NULL, NULL, 4, 0, 0, '2023-12-25 14:06:22', '2024-01-18 15:49:37', NULL, NULL);
+(1, NULL, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$pev3huoNJ24W.wO0QHpCeOB4NAXg1PVzedo4bxboNVtmcM2jb/6Zu', 'HDehjvnYmXNog2F2e05ep4YcoAwFifdS5cewkRTmTuGTNhaKbuRoEly5itjQ', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '20231024114233mwmdlaxmvmy6lcmjhdkl.png', NULL, NULL, '', NULL, NULL, NULL, 1, 0, 0, NULL, '2024-02-02 10:41:09', NULL, NULL),
+(2, NULL, 'Teacher', 'Solomon', 'teacher@gmail.com', NULL, '$2y$10$pev3huoNJ24W.wO0QHpCeOB4NAXg1PVzedo4bxboNVtmcM2jb/6Zu', NULL, 'ADM20240000', NULL, NULL, 'Male', '2024-01-01', NULL, 'Muslim', 'Married', '12345678', 'masters', '2023-10-27', '20240131013028yr7uwuwvhajwiolwuv8x.jpg', NULL, NULL, '', NULL, 'kampala Naguru', 'kampala', 3, 0, 0, NULL, '2024-02-02 10:44:48', '10 years', ''),
+(3, 11, 'Student', 'Abdulkarim fahad', 'student@gmail.com', NULL, '$2y$10$pev3huoNJ24W.wO0QHpCeOB4NAXg1PVzedo4bxboNVtmcM2jb/6Zu', 'gxtOH09Tz6d6l1AVQj4K0q3zLtOI4uPiZA6Trf7MOV2IlqFVd9ksJowvNWzS', 'ADM20240001', 'ROL20240001', 10, 'Male', '2023-10-03', 'Nubian', 'Muslim', NULL, '0707208954', NULL, NULL, '2024013112274882cjhsmiipsyuwxd3fl1.jpeg', 'B', '5 cm', '20kg', NULL, NULL, NULL, 2, 0, 0, NULL, '2024-02-02 09:28:30', NULL, NULL),
+(4, 8, 'Parent', 'gss', 'parent@gmail.com', NULL, '$2y$10$pev3huoNJ24W.wO0QHpCeOB4NAXg1PVzedo4bxboNVtmcM2jb/6Zu', NULL, 'ADM20240000', 'ROL20240000', NULL, 'Other', NULL, NULL, '', NULL, '3434343434', NULL, NULL, '202310111103543zyz76ywkovprre3fowz.png', '', '', '', 'musezi', 'kampala', NULL, 5, 0, 0, NULL, '2024-02-02 09:19:28', NULL, NULL),
+(5, NULL, 'fahad', NULL, 'hhego94@gmail.com', NULL, '$2y$10$J6I3SlZ9JizzGqaULwQj3OSVUWryRQs.FHQoG.gV3uXIyRyYWZ7XG', NULL, 'ADM20240000', 'ROL20240000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 1, 0, 0, '2023-10-09 11:16:38', '2024-02-02 09:19:28', NULL, NULL),
+(6, 4, 'jamila', 'jam', 'hhego9904@gmail.com', NULL, '$2y$10$lP8sV650WiBRjmaE37DDL.PPXZ8uKrwp6ZVhehKls7.wiOtt09mcC', NULL, 'ADM20240002', 'ROL20240002', 4, 'Female', '2023-10-01', '90', 'sam', NULL, '0707208954', NULL, NULL, '20231009031431ktzo2vkqpwogxjjsaugupng', 'A', '5 cm', '20kg', NULL, NULL, NULL, 2, 0, 1, '2023-10-09 12:14:31', '2024-02-02 09:28:30', NULL, NULL),
+(7, 11, 'mukisa', 'farook', 'hhego9974@gmail.com', NULL, '$2y$10$5hxKZo.CzsD7jgWHrpthgOIH5KHgr6m1fhou.iyNOjrGT.DrlF7C6', NULL, 'ADM20240003', 'ROL20240003', 1, 'Male', '2023-10-04', 'sam', 'islam', NULL, '0707208954', NULL, NULL, '20231009033724ismgkclstjdodaeicqfqpng', 'B', '3233', '20kg', NULL, NULL, NULL, 2, 0, 0, '2023-10-09 12:37:24', '2024-02-02 09:28:30', NULL, NULL),
+(8, 4, 'Higeni', 'Abdulkarim', 'sd@gmail.com', NULL, '$2y$10$9VgvQkBq.Ek2nR/9Us7Ly.73s3ZenJUY0me3OCJ9VPsnstS.YT0qq', NULL, 'ADM20240004', 'ROL20240004', 1, 'Male', '2023-10-05', 'sd', 'sam', NULL, '0707208954', NULL, NULL, '20231009062421tntvajxh3zq9vzujuryx.png', 'B', '3233', 'ds', NULL, NULL, NULL, 2, 0, 0, '2023-10-09 13:31:54', '2024-02-02 09:28:30', NULL, NULL),
+(9, 8, 'Hijaz', 'Finance', 'it@hijazfinance.com', NULL, '$2y$10$jZsgxUReOCoX5xY0mlXizuyPgsdhDvLvUMQzR/sHpVWoKgfUOZXSm', NULL, 'ADM20240005', 'ROL20240005', 5, 'Male', '2023-10-01', '12', 'islam', NULL, '00707208954', NULL, NULL, '20231009060303avtenseapm0ozta17cwopng', 'O', '5 cm', 'ds', NULL, NULL, NULL, 2, 1, 0, '2023-10-09 15:03:03', '2024-02-02 09:28:30', NULL, NULL),
+(10, NULL, 'Higeni', 'Abdulkarim', 'hhego194@gmail.com', NULL, '$2y$10$qDGXC/xS4POr/jPgviA6HeLttgpTQoStuNcZY0K4sfH1VeDv4FI8G', NULL, 'ADM20240000', 'ROL20240000', NULL, 'Male', NULL, NULL, NULL, NULL, '0707208954', NULL, NULL, '20231010021349uorqwk5very0uhkkw9ui.png', NULL, NULL, NULL, 'stealer', 'kibuli', NULL, 5, 1, 0, '2023-10-10 11:13:49', '2024-02-02 09:19:28', NULL, NULL),
+(11, NULL, 'Muzadde', 'Wabaana', 'kasasa@gmail.com', NULL, '$2y$10$FEWuisN11GXXQ.M2rt8uf.mqgN4Yx8E1Rb0PvcNZX9PdjmeUdb5.m', NULL, 'ADM20240000', 'ROL20240000', NULL, 'Male', NULL, NULL, NULL, NULL, '07000555055', NULL, NULL, '20231010074624mupropufqjky6eluxazu.png', NULL, NULL, NULL, 'musezi', 'kampala', NULL, 5, 0, 0, '2023-10-10 16:46:24', '2024-02-02 09:19:28', NULL, NULL),
+(12, NULL, 'Higeni', 'Abdulkarim', 'hhego9433@gmail.com', NULL, '$2y$10$lpzs34u6jLCNHGWFVjmuZ.1J0DOiD57RHYREbxekoXxbAb4zIE2iS', NULL, 'ADM20240000', 'ROL20240000', NULL, 'Female', '2023-10-01', NULL, 'sam', '', '0707208954', 'masters', '2023-10-07', '20231010094402h6gx5gr8uiohakbonswd.png', NULL, NULL, NULL, NULL, 'kibuli', 'kampala', 3, 1, 0, '2023-10-10 18:44:02', '2024-02-02 09:19:28', '10 years', 'yes'),
+(13, NULL, 'Maganjo', 'male', 'hhego99412@gmail.com', NULL, '$2y$10$TyLnKnFgZsDMZ.QfpdnI0.BlyCUvqpc7uNUPdTrbfOalRB1bzcykm', NULL, 'ADM20240000', 'ROL20240000', NULL, 'Male', '2023-10-01', NULL, 'islama', '', '0707208954', 'Diploma in Education', '2023-10-01', '20231011075437ck8nuc33yfyyvbkjfmu9.png', 'B', NULL, NULL, NULL, 'kibuli', 'kampala', 3, 0, 0, '2023-10-11 02:15:38', '2024-02-02 09:19:28', '10 years', 'yes'),
+(14, NULL, 'Mr. Kalule', 'Sadam', 'sadam@gmail.com', NULL, '$2y$10$MfN.YJafzbEmjXWnE.ouEOfz.I5Cm7QCVptLXuMBviGVcELx25ggG', NULL, '', '', NULL, 'Male', '2023-10-12', NULL, 'islam', 'married', '070993390', 'masters', '2023-10-12', '20231012064419furh2mfqhocddhyoijk2.png', NULL, NULL, NULL, NULL, 'kibuli', 'kamwokya', 3, 0, 0, '2023-10-12 03:44:19', '2024-02-02 09:19:28', '10 years', 'Serious'),
+(15, 11, 'Mayanja', 'sam', 'sam@gmail.com', NULL, '$2y$10$AYgGmyB3Aig8e4F67kfW1e1Nq/o4KgrG/ZkI3eW7DWURbE32l64Xm', NULL, 'ADM20240006', 'ROL20240006', 1, 'Male', '2023-10-01', 'muganda', 'muslim', NULL, '075598821', NULL, '2023-10-01', '202310120836490l0ysaeljvlx3tvkifwh.png', 'A', '5 cm', '20kg', NULL, NULL, NULL, 2, 0, 0, '2023-10-12 05:36:49', '2024-02-02 09:28:30', NULL, NULL),
+(16, NULL, 'Adam', 'Sulaiman', 'adam@gmail.com', NULL, '$2y$10$aK/G6pbMKM.Qhle0U2qjpeWWWRfkd5lPZlSztNp655FfB8iwCf5GW', NULL, 'ADM20240007', 'ROL20240007', 3, 'Male', '2023-09-24', 'Muganda', 'Muslim', NULL, '0789912003', NULL, '2023-10-19', '20231019084300uffalnz6cbjvushbe9nl.png', 'B', '56cm', '200kg', NULL, NULL, NULL, 2, 0, 0, '2023-10-19 15:13:13', '2024-02-02 09:28:30', NULL, NULL),
+(17, 19, 'Makubuya', 'Adam', 'makubuya@gmail.com', NULL, '$2y$10$YhWjRFSuU31ub8iTDsTgZuZ0zn42dO1bk1KSSabStLH/Skv3/lbP.', NULL, 'ADM20240008', 'ROL20240008', 5, 'Male', '2023-10-08', 'Mugisu', 'Muslim', NULL, '078982213', NULL, '2023-10-24', '20231024110443s9zebveqeapu9wgp8db6.jpeg', 'A', '500 cm', '400 Kgs', NULL, NULL, NULL, 2, 0, 0, '2023-10-24 08:04:43', '2024-02-02 09:28:30', NULL, NULL),
+(18, NULL, 'TEST', NULL, 'katulabye@gmail.com', NULL, '$2y$10$a56to.FCQd3ccJxlK38/auBpKC0TBGldK9NTxG/C/p1JFrANTdP42', NULL, 'ADM20240000', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2023-10-26 12:15:58', '2024-02-02 10:43:37', NULL, NULL),
+(19, NULL, 'Jackob', 'jhvjh', 'jhh@gmail.com', NULL, '$2y$10$szcj2IPZIEulveSQLN/wCemkwyQRPfLWhLI1XRORaDLttjQ.uEn1C', 'tgQ1Urb4hegJ8iGz6gz6Hy4vXLw4G3jrPrirhVPFRPhg4PzpRgPRjvuCNl93', 'ADM20240000', 'ROL20240000', NULL, 'Female', NULL, NULL, NULL, NULL, '877677676', NULL, NULL, '20231026054320cqv8q14afhcxavlhs7ch.png', NULL, NULL, NULL, 'kkjk', 'd', NULL, 5, 0, 0, '2023-10-26 14:43:20', '2024-02-02 09:19:28', NULL, NULL),
+(20, NULL, 'BRYAN', 'CASH', 'arafa@gmail.com', NULL, '$2y$10$Zu1cgGMkWNqAMgTTX/VbfemIB5hTAs0Nsxcq92fxgLp7TODdAeiz6', NULL, 'ADM20240000', 'ROL20240000', NULL, 'Male', '1000-12-31', NULL, 'dsfasd', 'Single and Contented', '32877877', 'Degree', '2023-10-26', NULL, 'A', NULL, NULL, NULL, 'fadf', '323233', 3, 0, 0, '2023-10-26 14:56:20', '2024-02-02 09:19:28', 'adsaf', '\"As an experienced and dedicated educator, I am committed to fostering a positive and inclusive learning environment. My teaching philosophy revolves around creating engaging lessons that cater to diverse learning styles and abilities. I believe in the po'),
+(21, NULL, 'Test', 'Student', 'test@gmail.com', NULL, '$2y$10$rpcArXZxEH8FFzi5YlPll.EEGSTKy6Ueyk.OM5m1ze4r6buATsydi', NULL, 'ADM20240009', 'ROL20240009', 3, 'Male', '1788-02-14', 'df', 'srdsdf', NULL, '45455544', NULL, '2023-10-27', '20231027123113yrgfdsb05f77xjih9dlt.png', 'B', 'f', 'sdf', NULL, NULL, NULL, 2, 0, 0, '2023-10-27 09:31:14', '2024-02-02 09:28:30', NULL, NULL),
+(22, 19, 'Bakulumpagi', 'Abdunoor', 'abdunoor@gmail.com', NULL, '$2y$10$CCWw7fPdBVQFdWPii1gzveM.olmT55Fg805AuvFLx.KFjcXRckW9O', NULL, 'ADM20240010', 'ROL20240010', 8, 'Male', '2023-10-01', 'Munyoli', 'Muslim', NULL, '07892145', NULL, '2023-10-28', '20231028124226z1zo7fuzhod6rlogobzc.png', 'A', '67 cm', '909 kg', NULL, NULL, NULL, 2, 0, 0, '2023-10-27 19:38:27', '2024-02-02 09:28:30', NULL, NULL),
+(23, NULL, 'Bursar Fardah', NULL, 'farda@gmail.com', NULL, '$2y$10$wGuD5LWbs52/Uz8yoOwzhuVfIqN503zttqo4ZJdR34ObXQvtZHvmW', 'FCYXflXMdf0wF8ubQ3b1RrDRu0eAbFcuBnn9HQBmMH333KPb4ytMaLLc91DP', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '20231225050622nszwxbcarse2puaidxmx.png', NULL, NULL, NULL, NULL, NULL, NULL, 4, 0, 0, '2023-12-25 14:06:22', '2024-02-02 09:19:28', NULL, NULL),
+(24, NULL, 'Faridah', 'Liblarian', 'farida@gmail.com', NULL, '$2y$10$wGuD5LWbs52/Uz8yoOwzhuVfIqN503zttqo4ZJdR34ObXQvtZHvmW', '5X7TT0V66pUGknlJFr5s0pnZgU8tMCiZyJjmqDufZEMqruwPL0eCqePyf1Og', '', 'ROL20240000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '20231225050622nszwxbcarse2puaidxmx.png', NULL, NULL, NULL, NULL, NULL, NULL, 6, 0, 0, '2023-12-25 14:06:22', '2024-02-02 13:34:16', NULL, NULL),
+(25, NULL, 'Namata Mariam', NULL, 'namata@gmail.com', NULL, '$2y$10$V/EHDXDZ7J1Q0dKVXJa1P.W8JaDQ4a5LVw.LbYP7nFewnPp0dRarS', NULL, '', 'ROL20240000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, 0, 0, '2024-02-01 14:25:25', '2024-02-02 09:19:28', NULL, NULL),
+(26, NULL, 'Kalame', 'Daudi', 'kalame@gmail.com', NULL, '$2y$10$Asf1tnhEhfP9IqUI9f53QuiUUDXKAl6M6EP99FHkibvu3VUio4akG', NULL, 'ADM20240011', 'ROL20240011', 3, 'Male', '2024-02-28', 'Mugisu', 'muslima', NULL, '0789547738', NULL, '2024-02-27', '20240202104332bnqqhvxooy3e1j82yqdu.jpg', 'A', '200 cm', '200kg', NULL, NULL, NULL, 2, 0, 0, '2024-02-02 07:43:32', '2024-02-02 09:28:30', NULL, NULL),
+(27, NULL, 'Walugembe', 'Said', 'walugembe@gmail.com', NULL, '$2y$10$CLpzMxLcuncX0N9q6tlTjusIBEOThdUyeunzEkC6m.DNpWIsD4L.e', NULL, 'ADM20240012', 'ROL20240012', 4, 'Male', '1981-02-03', 'Muganda', 'Muslim', NULL, '0748374782', NULL, '2024-02-02', '20240202113108uq6nqokpbi8xfsaawq4v.png', 'A', '44', '97kg', NULL, NULL, NULL, 2, 0, 0, '2024-02-02 08:31:08', '2024-02-02 09:28:30', NULL, NULL),
+(28, NULL, 'Nantume', 'Nantume', 'sumayyah@gmail.com', NULL, '$2y$10$QZjFVKe1lFqkkuBjTs5b0.UX.6RVWr2XmfgVbFTHPjoOpTGOO4Glu', NULL, 'ADM20240013', 'ROL20240013', 3, 'Female', '2004-03-04', 'Munyoli', 'muslim', NULL, '434345454', NULL, '2024-02-02', NULL, 'B', '67 cm', '55 kg', NULL, NULL, NULL, 2, 0, 0, '2024-02-02 09:12:50', '2024-02-02 09:28:30', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -964,6 +1054,24 @@ INSERT INTO `week` (`id`, `name`, `fullcalendar_day`, `created_at`, `updated_at`
 -- Indexes for table `assign_class_teacher`
 --
 ALTER TABLE `assign_class_teacher`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `authors`
+--
+ALTER TABLE `authors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `books`
+--
+ALTER TABLE `books`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `borrowings`
+--
+ALTER TABLE `borrowings`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1125,6 +1233,24 @@ ALTER TABLE `assign_class_teacher`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
+-- AUTO_INCREMENT for table `authors`
+--
+ALTER TABLE `authors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `books`
+--
+ALTER TABLE `books`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `borrowings`
+--
+ALTER TABLE `borrowings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `budget`
 --
 ALTER TABLE `budget`
@@ -1134,7 +1260,7 @@ ALTER TABLE `budget`
 -- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `class`
@@ -1254,7 +1380,7 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `week`

@@ -41,15 +41,11 @@ class StudentController extends Controller
             'height' => 'max:10',
             'weight' => 'max:10',
             'mobile_number' => 'max:15|min:8',
-            'admission_number' => 'max:50',
-            'roll_number' => 'max:50',
             'religion' => 'max:50',
         ]);
         $student = new User;
         $student->name = trim($request->name);
         $student->last_name = trim($request->last_name);
-        $student->admission_number = trim($request->admission_number);
-        $student->roll_number = trim($request->roll_number);
         $student->class_id = trim($request->class_id);
         $student->gender = trim($request->gender);
 

@@ -72,7 +72,7 @@
 
                         <div class="form-group col-md-6">
                           <label>Marital Status<span style="color: red;"></span></label>
-                          <input type="date" class="form-control" name="marital_status" value="{{ old('marital_status', $getRecord->marital_status) }}"   placeholder="Enter Mobile Number">
+                          <input type="text" class="form-control" name="marital_status" value="{{ old('marital_status', $getRecord->marital_status) }}"   placeholder="Enter Mobile Number">
                           <div style="color: red">{{ $errors->first('marital_status') }}</div>
                       </div>
 
@@ -110,12 +110,6 @@
                         <div style="color: red">{{ $errors->first('work_experience') }}</div>
                     </div>
 
-                  <div class="form-group col-md-6">
-                    <label>Religion<span style="color: red;"></span></label>
-                    <input type="text" class="form-control" name="religion" value="{{ old('religion', $getRecord->religion) }}" required placeholder="Enter religion">
-                    <div style="color: red">{{ $errors->first('religion') }}</div>
-                </div>
-
                    
                   <div class="form-group">
                     <label>Email address<span style="color: red;">*</span></label>
@@ -125,7 +119,7 @@
                   
                 <!-- /.card-body -->
 
-                <div class="card-footer">
+                <div class="card-footer" style="text-align: right;">
                   <button type="submit" class="btn btn-primary">Update</button>
                 </div>
               </form>

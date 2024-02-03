@@ -23,6 +23,9 @@ use App\Http\Controllers\FeesCollectionController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\LibrariansController;
+use App\Http\Controllers\AuthorsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -230,6 +233,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/fees_collection/export_collect_fees_report', [FeesCollectionController::class, 'export_collect_fees_report']);
 
 
+    Route::get('admin/librarian/list', [LibrariansController::class, 'list']); 
+    Route::get('admin/librarian/add', [LibrariansController::class, 'add']); 
+    Route::post('admin/librarian/add', [LibrariansController::class, 'insert']);
+    Route::get('admin/librarian/edit/{id}', [LibrariansController::class, 'edit']); 
+    Route::post('admin/librarian/edit/{id}', [LibrariansController::class, 'update']); 
+    Route::get('admin/librarian/delete/{id}', [LibrariansController::class, 'delete']); 
+
     
     
 });
@@ -379,4 +389,26 @@ Route::group(['middleware' => 'bursar'], function () {
     Route::post('bursar/account', [UserController::class, 'UpdateMyAccountBursar']);
     Route::get('bursar/change_password', [UserController::class, 'change_password']);
     Route::post('bursar/change_password', [UserController::class, 'update_change_password']);
+});
+
+
+Route::group(['middleware' => 'library'], function () {
+
+    Route::get('librarian/dashboard', [DashboardController::class, 'dashboard']); 
+    //Books routes
+    Route::get('librarian/books/list', [BookController::class, 'list']); 
+    Route::get('librarian/books/add', [BookController::class, 'add']); 
+    Route::post('librarian/books/add', [BookController::class, 'insert']);
+    Route::get('librarian/books/edit/{id}', [BookController::class, 'edit']); 
+    Route::post('librarian/books/edit/{id}', [BookController::class, 'update']); 
+    Route::get('librarian/books/delete/{id}', [BookController::class, 'delete']); 
+
+    //Authors routes
+    Route::get('librarian/authors/list', [AuthorsController::class, 'list']); 
+    Route::get('librarian/authors/add', [AuthorsController::class, 'add']); 
+    Route::post('librarian/authors/add', [AuthorsController::class, 'insert']);
+    Route::get('librarian/authors/edit/{id}', [AuthorsController::class, 'edit']); 
+    Route::post('librarian/authors/edit/{id}', [AuthorsController::class, 'update']); 
+    Route::get('librarian/authors/delete/{id}', [AuthorsController::class, 'delete']); 
+
 });

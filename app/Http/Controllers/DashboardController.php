@@ -72,5 +72,11 @@ class DashboardController extends Controller
             return view('parent.dashboard', $data);            
         } 
 
+        else if(Auth::user()->user_type == 6)
+        {
+            $data['TotalBooks'] = '';            
+            return view('librarian.dashboard', $data);            
+        } 
+
     }
 }

@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add New Year School Budget</h1>
+            <h1>Add New Librarian</h1>
           </div>
           
         </div>
@@ -24,23 +24,25 @@
               <form method="post" action="" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="card-body">
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label>Budget Category<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" name="category"  value="{{ old('category') }}" required placeholder="Enter Budget Category">
-                            <div style="color: red">{{ $errors->first('name') }}</div>
-                          </div>
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" required placeholder="Enter Name">
+                  </div>
+                  <div class="form-group">
+                    <label>Email address</label>
+                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="Enter email">
+                    <div style="color: red">{{ $errors->first('email') }}</div>
+                  </div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" required placeholder="Password">
+                  </div>
 
-                          <div class="form-group col-md-6">
-                            <label>Total Estimated Amount</label>
-                            <input type="text"  value="{{ old('amount') }}" class="form-control" name="amount">
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label>Year</label>
-                            <input type="text"  value="{{ old('year') }}" class="form-control" name="year">
-                        </div>
-    
+                  <div class="form-group">
+                    <label>Profile Picture<span style="color: red;"></span></label>
+                    <input type="file" class="form-control" name="profile_pic">
+                    <div style="color: red">{{ $errors->first('profile_pic') }}</div>
+                </div>
                  
                 </div>
                 <!-- /.card-body -->
@@ -51,6 +53,8 @@
               </form>
             </div>
             <!-- /.card -->
+
+
 
           </div>
           <!--/.col (left) -->

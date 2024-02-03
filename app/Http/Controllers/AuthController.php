@@ -64,6 +64,10 @@ class AuthController extends Controller
             {
                 return redirect('parent/dashboard');            
             }
+            else if(Auth::user()->user_type == 6)
+            {
+                return redirect('librarian/dashboard');            
+            }
             
         }
         else

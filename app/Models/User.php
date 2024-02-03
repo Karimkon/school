@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Request;
 use Cache;
+use Str;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -44,6 +46,46 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
    
+        protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            // Generate and set admission number
+            $model->admission_number = self::getNextAdmissionNumber();
+
+            // Generate and set roll number
+            $model->roll_number = self::getNextRollNumber();
+        });
+    }
+
+        protected static function getNextAdmissionNumber()
+    {
+        // Get the latest admission number for students
+        $latestAdmissionNumber = self::where('user_type', 2)->max('admission_number');
+
+        // Extract the numeric part and increment
+        $numericPart = (int)substr($latestAdmissionNumber, 7);
+        $nextNumericPart = $numericPart + 1;
+
+        return $nextNumericPart;
+    }
+
+    protected static function getNextRollNumber()
+    {
+        // Get the latest roll number for students
+        $latestRollNumber = self::where('user_type', 2)->max('roll_number');
+
+        // Extract the numeric part and increment
+        $numericPart = (int)substr($latestRollNumber, 7);
+        $nextNumericPart = $numericPart + 1;
+
+        return $nextNumericPart;
+    }
+
+
+    
+
     static public function getSingle($id){
         return self::find($id);
     }
@@ -555,6 +597,25 @@ static public function getMyStudentCount($parent_id){
                             ->where('user_type','=', $user_type)
                             ->where('is_delete','=',0)
                              ->count();
+    }
+
+    static function getLibrarian()
+    {
+        $return = self::select('users.*')
+                            ->where('user_type','=',6)
+                            ->where('is_delete','=',0);
+                            if(!empty(Request::get('name')))
+                            {
+                                $return = $return ->where('name','like','%'.Request::get('name').'%');
+                            }
+                            if(!empty(Request::get('email')))
+                            {
+                                $return = $return ->where('email','like','%'.Request::get('email').'%');
+                            }
+        $return = $return ->orderBy('id', 'desc')
+        ->paginate(25);
+        return $return;
+
     }
 
 }

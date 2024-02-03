@@ -37,16 +37,6 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label>Admission Number<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" name="admission_number" value="{{ old('admission_number') }}" required placeholder="Enter Admission Number">
-                            <div style="color: red">{{ $errors->first('last_name') }}</div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Roll Number<span style="color: red;"></span></label>
-                            <input type="text" class="form-control" name="roll_number" value="{{ old('roll_number') }}" placeholder="Enter Admission Number">
-                            <div style="color: red">{{ $errors->first('last_name') }}</div>
-                        </div>
-                        <div class="form-group col-md-6">
                             <label>Class<span style="color: red;">*</span></label>
                             <select class="form-control" required name="class_id">
                                 <option value="">Select Class</option>
@@ -74,7 +64,7 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label>Caste<span style="color: red;"></span></label>
+                            <label>Tribe<span style="color: red;"></span></label>
                             <input type="text" class="form-control" name="caste" value="{{ old('caste') }}" required placeholder="Enter Caste">
                             <div style="color: red">{{ $errors->first('caste') }}</div>
                         </div>
